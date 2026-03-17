@@ -1,0 +1,9 @@
+{
+  "agents": [
+    {
+      "agent_id": null,
+      "name": "Areeb",
+      "config_path": "agent_configs/Areeb.json"
+    }
+  ]
+}
