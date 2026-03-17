@@ -1,0 +1,33 @@
+{
+  "name": "reschedule_appointment",
+  "description": "Reschedule an existing appointment to a new time",
+  "type": "webhook",
+  "api": {
+    "url": "https://YOUR_PRODUCTION_URL.vercel.app/api/agent/reschedule",
+    "method": "POST",
+    "headers": {
+      "x-agent-token": "${AGENT_SECRET_TOKEN}",
+      "Content-Type": "application/json"
+    },
+    "body": [
+      {
+        "name": "bookingUid",
+        "description": "The booking UID from Cal.com",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "start",
+        "description": "New ISO 8601 datetime string for the appointment",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "reason",
+        "description": "Reason for rescheduling",
+        "type": "string",
+        "required": false
+      }
+    ]
+  }
+}

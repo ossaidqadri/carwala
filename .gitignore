@@ -37,3 +37,9 @@ skills-lock.json
 
 # plans
 plans/
+
+# Allow agent configs to be committed
+!agents.json
+!tools.json
+!agent_configs/
+!tool_configs/

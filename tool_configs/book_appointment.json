@@ -1,0 +1,51 @@
+{
+  "name": "book_appointment",
+  "description": "Book a car detailing appointment for the customer",
+  "type": "webhook",
+  "api": {
+    "url": "https://YOUR_PRODUCTION_URL.vercel.app/api/agent/book",
+    "method": "POST",
+    "headers": {
+      "x-agent-token": "${AGENT_SECRET_TOKEN}",
+      "Content-Type": "application/json"
+    },
+    "body": [
+      {
+        "name": "eventTypeId",
+        "description": "The Cal.com event type ID for the service",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "start",
+        "description": "ISO 8601 datetime string for appointment start",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "name",
+        "description": "Customer full name",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "phone",
+        "description": "Customer WhatsApp or phone number",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "email",
+        "description": "Customer email address if provided",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "notes",
+        "description": "Additional notes about the vehicle",
+        "type": "string",
+        "required": false
+      }
+    ]
+  }
+}

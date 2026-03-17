@@ -1,0 +1,32 @@
+{
+  "name": "check_slots",
+  "description": "Check available appointment slots for a given service and date range",
+  "type": "webhook",
+  "api": {
+    "url": "https://YOUR_PRODUCTION_URL.vercel.app/api/agent/slots",
+    "method": "GET",
+    "headers": {
+      "x-agent-token": "${AGENT_SECRET_TOKEN}"
+    },
+    "query_params": [
+      {
+        "name": "eventTypeId",
+        "description": "The Cal.com event type ID for the service",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "dateFrom",
+        "description": "Start date in YYYY-MM-DD format",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "dateTo",
+        "description": "End date in YYYY-MM-DD format. Use same as dateFrom for a single day.",
+        "type": "string",
+        "required": true
+      }
+    ]
+  }
+}
