@@ -34,6 +34,13 @@ const SERVICES: ServiceOption[] = [
     duration: 120,
     description: "Complete perfection — paint correction, ceramic coating & full detail",
   },
+  {
+    id: "diamond",
+    name: "Diamond Package",
+    eventTypeId: process.env.NEXT_PUBLIC_CALCOM_DIAMOND_EVENT_TYPE_ID || "",
+    duration: 720,
+    description: "The ultimate transformation — full paint correction, multi-layer ceramic coating, interior restoration, engine bay detailing & lifetime protection",
+  },
 ];
 
 export const metadata: Metadata = generatePageMetadata({

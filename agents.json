@@ -4,10 +4,6 @@
             "agent_id": "agent_9201kkydm5g2ee4a0rjzee7daaf8",
             "name": "Areeb",
             "config_path": "agent_configs/Areeb-1.json"
-        },
-        {
-            "config": "agent_configs\\Areeb-1.json",
-            "id": "agent_9201kkydm5g2ee4a0rjzee7daaf8"
         }
     ]
 }

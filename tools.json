@@ -1,20 +1,3 @@
 {
-  "tools": [
-    {
-      "name": "check_slots",
-      "config_path": "tool_configs/check_slots.json"
-    },
-    {
-      "name": "book_appointment",
-      "config_path": "tool_configs/book_appointment.json"
-    },
-    {
-      "name": "cancel_appointment",
-      "config_path": "tool_configs/cancel_appointment.json"
-    },
-    {
-      "name": "reschedule_appointment",
-      "config_path": "tool_configs/reschedule_appointment.json"
-    }
-  ]
+  "tools": []
 }

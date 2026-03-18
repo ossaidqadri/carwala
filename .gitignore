@@ -43,3 +43,6 @@ plans/
 !tools.json
 !agent_configs/
 !tool_configs/
+
+.env*.local
+.vercel
