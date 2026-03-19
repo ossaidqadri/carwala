@@ -78,6 +78,19 @@ const pricingData: PricingPlan[] = [
       "Complete Deep Detailing of Everything",
     ],
   },
+  {
+    plan_bg_color: "bg-cyan-500/10",
+    plan_name: "Diamond Detailing Package",
+    plan_descp: "Full body ceramic coating with complete deep detailing — the ultimate protection",
+    plan_price: 22000,
+    serviceId: "diamond",
+    plan_feature: [
+      "Full Body Premium Quality Ceramic Coating",
+      "All Things Of Basic, Gold & Platinum Package",
+      "Complete Deep Cleaning of Everything",
+      "Full Deep Detailing of Everything",
+    ],
+  },
 ];
 
 export function Pricing() {
@@ -127,16 +140,19 @@ export function Pricing() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={index}
-                className="w-full"
+                className={cn(
+                  "w-full",
+                  index === pricingData.length - 1 && pricingData.length % 2 !== 0 && "md:col-span-2 md:max-w-[calc(50%-12px)] md:mx-auto"
+                )}
               >
                 <Card
                   className={cn(
                     items.plan_bg_color,
-                    "p-8 sm:p-10 rounded-2xl ring-0 w-full sm:w-fit",
+                    "p-8 sm:p-10 rounded-2xl ring-0 w-full",
                   )}
                   key={index}
                 >
-                  <CardContent className="flex flex-col sm:flex-row gap-6 md:gap-10 items-start self-stretch px-0 h-full w-full">
+                  <CardContent className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start self-stretch px-0 h-full w-full">
                     <div className="flex flex-col items-start justify-between self-stretch gap-6">
                       <div className="flex flex-col gap-3">
                         <Badge className="py-1 px-3 text-sm font-normal leading-5 h-auto whitespace-normal">
@@ -147,9 +163,14 @@ export function Pricing() {
                         </p>
                       </div>
                       <div className="flex flex-col gap-4">
-                        <p className="text-4xl sm:text-5xl font-semibold text-card-foreground flex items-end">
-                          PKR {items.plan_price.toLocaleString()}
-                        </p>
+                        <div className="flex flex-col gap-1">
+                          <p className="text-xs font-normal text-muted-foreground uppercase tracking-wider">
+                            Starting from
+                          </p>
+                          <p className="text-4xl sm:text-5xl font-semibold text-card-foreground flex items-end">
+                            PKR {items.plan_price.toLocaleString()}
+                          </p>
+                        </div>
                         <Link href={`/calendar?service=${items.serviceId}`}>
                           <Button className="relative bg-white hover:bg-white hover:text-black dark:hover:text-black text-black text-sm font-medium rounded-full h-12 p-1 ps-6 pe-14 group transition-all duration-500 hover:ps-14 hover:pe-6 w-fit overflow-hidden">
                             <span className="relative z-10 transition-all duration-500">
@@ -164,11 +185,11 @@ export function Pricing() {
                     </div>
                     <Separator
                       orientation="vertical"
-                      className="hidden sm:block"
+                      className="hidden lg:block"
                     />
                     <Separator
                       orientation="horizontal"
-                      className="sm:hidden block"
+                      className="lg:hidden block"
                     />
                     <div className="flex flex-col items-start gap-3 grow">
                       <p className="text-card-foreground text-base sm:text-xl font-normal sm:font-medium">
