@@ -1,9 +1,9 @@
 {
     "agents": [
         {
-            "agent_id": "agent_9201kkydm5g2ee4a0rjzee7daaf8",
-            "name": "Areeb",
-            "config_path": "agent_configs/Areeb-1.json"
+            "agent_id": "agent_0401km3y12mjf95a5h3yspgy3njr",
+            "name": "Sara",
+            "config_path": "agent_configs/sara_v1.json"
         }
     ]
 }
