@@ -41,8 +41,10 @@ plans/
 # Allow agent configs to be committed
 !agents.json
 !tools.json
-!agent_configs/
 !tool_configs/
+
+# Agent configs contain API keys - do not commit
+agent_configs/
 
 .env*.local
 .vercel
