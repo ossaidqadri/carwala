@@ -86,7 +86,7 @@ export default function GalleryPage() {
                     className="w-full aspect-square rounded-lg border border-border"
                     slideMode="drag"
                     autoplay={true}
-                    autoplayDuration={4000}
+                    autoplayDuration={8000}
                   />
                   <p className="mt-3 text-sm text-muted-foreground font-body">
                     {comparison.title}
