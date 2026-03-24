@@ -12,27 +12,46 @@ export const metadata: Metadata = generatePageMetadata({
 })
 
 const galleryImages = [
-  { src: "/media/501-homepage-007.webp", alt: "Premium Interior and Exterior Detailing" },
-  { src: "/media/501-homepage-008.webp", alt: "Paint Protection Film Application" },
-  { src: "/media/501-homepage-009.webp", alt: "Paint Correction and Polishing" },
-  { src: "/media/501-homepage-010.webp", alt: "Ceramic Coating Service" },
-  { src: "/media/501-homepage-011.webp", alt: "Professional Window Tinting" },
-  { src: "/media/501-homepage-003.mp4", alt: "Professional car detailing process", isVideo: true },
-  { src: "/media/501-homepage-020.mp4", alt: "Complete car transformation", isVideo: true },
-  { src: "/media/501-homepage-021.mp4", alt: "Auto detailing showcase", isVideo: true },
+  // Before images
+  { src: "/media/Before/dirty-rear-floor.webp", alt: "Before - Dirty rear floor with debris and stains" },
+  { src: "/media/Before/scratched-roof-paint.webp", alt: "Before - Scratched and swirled roof paint" },
+  { src: "/media/Before/muddy-wheel-arch.webp", alt: "Before - Muddy wheel arch and dusty tire" },
+  { src: "/media/Before/dusty-truck-bed.webp", alt: "Before - Dusty truck bed with dirty seats" },
+  { src: "/media/Before/dirty-driver-floor-mat.webp", alt: "Before - Dirty driver-side floor mat" },
+  // After images
+  { src: "/media/After/glossy-side-panel.webp", alt: "After - Glossy black side panel with mirror finish" },
+  { src: "/media/After/clean-truck-bed.webp", alt: "After - Clean and polished truck bed" },
+  { src: "/media/After/shiny-front-grille.webp", alt: "After - Shiny front grille and hood" },
+  { src: "/media/After/polished-hood-reflection.webp", alt: "After - Perfect hood reflections after polishing" },
+  { src: "/media/After/clean-truck-seats.webp", alt: "After - Clean truck bed seats" },
 ]
 
-// Before/After comparison images (update with your actual before/after pairs)
+// Before/After comparison images
 const comparisonImages = [
   {
-    before: "/media/501-homepage-007.webp",
-    after: "/media/501-homepage-008.webp",
-    title: "Paint Correction & Polishing",
+    before: "/media/Before/scratched-roof-paint.webp",
+    after: "/media/After/polished-hood-reflection.webp",
+    title: "Paint Correction & Polish",
   },
   {
-    before: "/media/501-homepage-009.webp",
-    after: "/media/501-homepage-010.webp",
-    title: "Ceramic Coating Protection",
+    before: "/media/Before/muddy-wheel-arch.webp",
+    after: "/media/After/glossy-side-panel.webp",
+    title: "Exterior Detail & Wheel Clean",
+  },
+  {
+    before: "/media/Before/dusty-truck-bed.webp",
+    after: "/media/After/clean-truck-bed.webp",
+    title: "Truck Bed Deep Clean",
+  },
+  {
+    before: "/media/Before/dirty-rear-floor.webp",
+    after: "/media/After/shiny-front-grille.webp",
+    title: "Interior Vacuum & Detail",
+  },
+  {
+    before: "/media/Before/dirty-driver-floor-mat.webp",
+    after: "/media/After/clean-truck-seats.webp",
+    title: "Floor Mat Restoration",
   },
 ]
 
