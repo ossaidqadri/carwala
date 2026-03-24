@@ -85,8 +85,7 @@ export default function GalleryPage() {
                     secondImageClassName="object-cover w-full h-full"
                     className="w-full aspect-square rounded-lg border border-border"
                     slideMode="drag"
-                    autoplay={true}
-                    autoplayDuration={8000}
+                    autoplay={false}
                   />
                   <p className="mt-3 text-sm text-muted-foreground font-body">
                     {comparison.title}
