@@ -11,14 +11,17 @@ export function CallToAction() {
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
           autoPlay
           muted
           loop
           playsInline
+          preload="metadata"
         >
           <source src={img501Homepage021Mp4} type="video/mp4" />
         </video>
+        {/* Fallback for reduced-motion users */}
+        <div className="hidden motion-reduce:block absolute inset-0 z-0 bg-gradient-to-br from-gray-900 to-gray-700" />
       </div>
 
       <div className="container relative z-20 mx-auto px-4 text-center">

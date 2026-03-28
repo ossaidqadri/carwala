@@ -11,14 +11,19 @@ export function Hero() {
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
           autoPlay
           muted
           loop
           playsInline
+          preload="metadata"
         >
           <source src={img501Homepage020Mp4} type="video/mp4" />
         </video>
+        {/* Fallback image for reduced-motion users */}
+        <div className="hidden motion-reduce:block absolute inset-0 z-0 bg-gradient-to-br from-gray-900 to-gray-700">
+          <div className="absolute inset-0 opacity-20 bg-[url('/media/501-homepage-020.mp4')] bg-cover bg-center" />
+        </div>
       </div>
 
       <div className="container relative z-20 max-w-[1365px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-0 items-end">

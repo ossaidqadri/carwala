@@ -5,6 +5,7 @@ import { TRPCProvider } from "@/components/providers"
 import { Toaster } from "sonner"
 import { WhatsAppWidget } from "@/components/WhatsAppWidget"
 import { PwaProvider } from "@/components/PwaProvider"
+import { ErrorBoundary } from "@/components/ErrorBoundary"
 import { defaultMetadata } from "@/lib/metadata"
 import "./globals.css"
 
@@ -24,14 +25,16 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/Mulish/Mulish-VariableFont_wght.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
       <body className="font-body antialiased">
-        <PwaProvider>
-          <TRPCProvider>
-            {children}
-            <WhatsAppWidget />
-            <Analytics />
-            <Toaster />
-          </TRPCProvider>
-        </PwaProvider>
+        <ErrorBoundary>
+          <PwaProvider>
+            <TRPCProvider>
+              {children}
+              <WhatsAppWidget />
+              <Analytics />
+              <Toaster />
+            </TRPCProvider>
+          </PwaProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )

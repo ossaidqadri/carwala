@@ -36,8 +36,8 @@ const formSchema = z.object({
   phone: z.string().min(10, {
     message: "Phone number must be at least 10 characters.",
   }),
-  service: z.string({
-    required_error: "Please select a service.",
+  service: z.string().min(1, {
+    message: "Please select a service.",
   }),
   message: z.string().optional(),
 })

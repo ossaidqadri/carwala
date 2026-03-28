@@ -8,15 +8,21 @@ import { buttonVariants } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
 
-import type { DayPickerSingleProps } from "react-day-picker";
+interface SingleCalendarProps {
+  className?: string;
+  classNames?: Record<string, string>;
+  selected?: Date;
+  onSelect?: (date: Date | undefined) => void;
+}
 
-function SingleCalendar({ className, classNames, showOutsideDays = true, selected, ...props }: DayPickerSingleProps) {
+function SingleCalendar({ className, classNames, selected, onSelect }: SingleCalendarProps) {
   const [currentMonth, setCurrentMonth] = React.useState<Date | undefined>(selected instanceof Date ? selected : undefined);
 
   return (
     <DayPicker
+      mode="single"
       selected={selected}
-      showOutsideDays={showOutsideDays}
+      onSelect={onSelect}
       month={currentMonth}
       onMonthChange={setCurrentMonth}
       className={cn("p-3", className)}
@@ -49,10 +55,11 @@ function SingleCalendar({ className, classNames, showOutsideDays = true, selecte
         ...classNames,
       }}
       components={{
-        IconLeft: ({ className, ...props }) => <ChevronLeft className={cn("h-4 w-4", className)} {...props} />,
-        IconRight: ({ className, ...props }) => <ChevronRight className={cn("h-4 w-4", className)} {...props} />,
+        Chevron: ({ className, orientation, ...props }) => {
+          const Icon = orientation === "left" ? ChevronLeft : ChevronRight;
+          return <Icon className={cn("h-4 w-4", className)} {...props} />;
+        },
       }}
-      {...props}
     />
   );
 }

@@ -82,7 +82,7 @@ export default function GalleryPage() {
                     firstImage={comparison.after}
                     secondImage={comparison.before}
                     firstImageClassName="object-cover w-full h-full"
-                    secondImageClassName="object-cover w-full h-full"
+                    secondImageClassname="object-cover w-full h-full"
                     className="w-full aspect-square rounded-lg border border-border"
                     slideMode="drag"
                     autoplay={false}
@@ -106,22 +106,13 @@ export default function GalleryPage() {
                   key={i}
                   className="group relative aspect-square overflow-hidden rounded-lg bg-muted"
                 >
-                  {item.isVideo ? (
-                    <video
-                      src={item.src}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                    />
-                  ) : (
-                    <img
-                      src={item.src}
-                      alt={item.alt}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  )}
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
                 </div>
               ))}
             </div>

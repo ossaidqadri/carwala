@@ -5,6 +5,38 @@ import { publicProcedure, router } from "../trpc";
 
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 
+// Sanitize user input to prevent injection attacks
+function sanitizeInput(input: string): string {
+  return input
+    .replace(/[<>]/g, '') // Remove angle brackets
+    .replace(/javascript:/gi, '') // Remove javascript: protocol
+    .replace(/on\w+=/gi, '') // Remove event handlers like onclick=
+    .trim();
+}
+
+// Validate and sanitize all contact form fields
+function sanitizeContactData(data: {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  message?: string;
+}): {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+} {
+  return {
+    name: sanitizeInput(data.name).slice(0, 100),
+    email: sanitizeInput(data.email).slice(0, 254),
+    phone: data.phone.replace(/[^0-9+\-\s()]/g, '').slice(0, 20),
+    service: sanitizeInput(data.service).slice(0, 50),
+    message: sanitizeInput(data.message || '').slice(0, 2000),
+  };
+}
+
 function getGoogleAuth() {
   const auth = new google.auth.GoogleAuth({
     credentials: {
@@ -105,7 +137,12 @@ export const contactRouter = router({
   submit: publicProcedure
     .input(contactFormSchema)
     .mutation(async ({ input }) => {
-      await Promise.all([appendToSheet(input), sendEmail(input)]);
+      // Sanitize input before processing
+      const sanitizedData = sanitizeContactData(input);
+      await Promise.all([
+        appendToSheet(sanitizedData),
+        sendEmail(sanitizedData),
+      ]);
       return { message: "Form submitted successfully" };
     }),
 });

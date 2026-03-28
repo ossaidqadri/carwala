@@ -22,7 +22,7 @@ export function useCountUp(
 
   const [count, setCount] = useState(start);
   const [isComplete, setIsComplete] = useState(false);
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number | undefined>(undefined);
   const startTimeRef = useRef<number | null>(null);
 
   const easeFunctions = {

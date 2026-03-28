@@ -8,6 +8,7 @@ import { Footer } from "@/components/home/Footer"
 import { generatePageMetadata } from "@/lib/metadata"
 import type { Metadata } from "next"
 import Script from "next/script"
+import type React from "react"
 
 declare global {
   namespace JSX {
@@ -37,6 +38,7 @@ export default function Home() {
       <Services />
       <CallToAction />
       <Footer />
+      {/* @ts-ignore - ElevenLabs Convai widget */}
       <elevenlabs-convai agent-id="agent_0401km3y12mjf95a5h3yspgy3njr" />
       <Script src="https://unpkg.com/@elevenlabs/convai-widget-embed" strategy="afterInteractive" />
     </main>

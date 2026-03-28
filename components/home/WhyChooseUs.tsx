@@ -47,14 +47,17 @@ export function WhyChooseUs() {
           {/* Video Section */}
           <div className="lg:col-span-4 relative min-h-[400px] bg-black overflow-hidden group">
             <video
-              className={`absolute inset-0 w-full h-full object-cover ${cardsInView ? 'animate-why-choose-video' : ''}`}
+              className={`absolute inset-0 w-full h-full object-cover motion-reduce:hidden ${cardsInView ? 'animate-why-choose-video' : ''}`}
               autoPlay
               muted
               loop
               playsInline
+              preload="metadata"
             >
               <source src={img501Homepage003Mp4} type="video/mp4" />
             </video>
+            {/* Fallback static background for reduced-motion users */}
+            <div className="hidden motion-reduce:block absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-700" />
           </div>
 
           {/* Features Grid */}
