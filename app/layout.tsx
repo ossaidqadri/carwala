@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { TRPCProvider } from "@/components/providers"
 import { Toaster } from "sonner"
 import { WhatsAppWidget } from "@/components/WhatsAppWidget"
+import { PwaProvider } from "@/components/PwaProvider"
 import { defaultMetadata } from "@/lib/metadata"
 import "./globals.css"
 
@@ -23,12 +24,14 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/Mulish/Mulish-VariableFont_wght.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
       <body className="font-body antialiased">
-        <TRPCProvider>
-          {children}
-          <WhatsAppWidget />
-          <Analytics />
-          <Toaster />
-        </TRPCProvider>
+        <PwaProvider>
+          <TRPCProvider>
+            {children}
+            <WhatsAppWidget />
+            <Analytics />
+            <Toaster />
+          </TRPCProvider>
+        </PwaProvider>
       </body>
     </html>
   )
