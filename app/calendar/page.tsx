@@ -4,6 +4,7 @@ import BookingWidget from "@/components/booking-calendar/booking-widget";
 import type { ServiceOption } from "@/components/booking-calendar/booking-widget";
 import { generatePageMetadata } from "@/lib/metadata"
 import type { Metadata } from "next"
+import { ElevenLabsWidget } from "@/components/ElevenLabsWidget"
 
 const SERVICES: ServiceOption[] = [
   {
@@ -83,6 +84,7 @@ export default async function CalendarPage({
         </div>
       </main>
       <Footer />
+      <ElevenLabsWidget agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
     </>
   );
 }

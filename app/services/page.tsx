@@ -1,6 +1,7 @@
 import { Header } from "@/components/home/Header"
 import { Footer } from "@/components/home/Footer"
 import { Pricing } from "@/components/Pricing"
+import { ElevenLabsWidget } from "@/components/ElevenLabsWidget"
 
 export default function ServicesPage() {
   return (
@@ -10,6 +11,7 @@ export default function ServicesPage() {
         <Pricing />
       </main>
       <Footer />
+      <ElevenLabsWidget agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
     </>
   )
 }

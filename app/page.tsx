@@ -7,18 +7,7 @@ import { CallToAction } from "@/components/home/CallToAction"
 import { Footer } from "@/components/home/Footer"
 import { generatePageMetadata } from "@/lib/metadata"
 import type { Metadata } from "next"
-import Script from "next/script"
-import type React from "react"
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "elevenlabs-convai": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
-        "agent-id"?: string
-      }
-    }
-  }
-}
+import { ElevenLabsWidget } from "@/components/ElevenLabsWidget"
 
 export const dynamic = 'force-static'
 
@@ -38,9 +27,7 @@ export default function Home() {
       <Services />
       <CallToAction />
       <Footer />
-      {/* @ts-ignore - ElevenLabs Convai widget */}
-      <elevenlabs-convai agent-id="agent_0401km3y12mjf95a5h3yspgy3njr" />
-      <Script src="https://unpkg.com/@elevenlabs/convai-widget-embed" strategy="afterInteractive" />
+      <ElevenLabsWidget agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
     </main>
   )
 }

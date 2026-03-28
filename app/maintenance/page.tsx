@@ -4,6 +4,7 @@ import { motion } from "motion/react"
 import { Wrench, Mail, Phone, RotateCcw } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { ElevenLabsWidget } from "@/components/ElevenLabsWidget"
 
 export default function MaintenancePage() {
   return (
@@ -88,6 +89,7 @@ export default function MaintenancePage() {
           Car Wala — Premium Car Care Services
         </motion.p>
       </motion.div>
+      <ElevenLabsWidget agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
     </div>
   )
 }

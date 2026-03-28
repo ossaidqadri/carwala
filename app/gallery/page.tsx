@@ -3,6 +3,7 @@ import { Footer } from "@/components/home/Footer"
 import { generatePageMetadata } from "@/lib/metadata"
 import { Compare } from "@/components/ui/compare"
 import type { Metadata } from "next"
+import { ElevenLabsWidget } from "@/components/ElevenLabsWidget"
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Car Detailing Gallery",
@@ -120,6 +121,7 @@ export default function GalleryPage() {
         </div>
       </main>
       <Footer />
+      <ElevenLabsWidget agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
     </>
   )
 }
