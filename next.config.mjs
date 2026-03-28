@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const isDev = process.env.NODE_ENV === 'development'
+
 const nextConfig = {
   images: {
     unoptimized: false,
@@ -22,7 +24,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://assets.elevenlabs.io https://elevenlabs.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://api.elevenlabs.io https://api.cal.com https://unpkg.com; frame-ancestors 'none';",
+            value: `default-src 'self'; script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://assets.elevenlabs.io https://elevenlabs.io https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.elevenlabs.io https://api.cal.com https://unpkg.com wss://*.elevenlabs.io; frame-src https://elevenlabs.io; frame-ancestors 'none';`,
           },
           {
             key: 'Strict-Transport-Security',
@@ -46,7 +48,7 @@ const nextConfig = {
           },
           {
             key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
+            value: 'camera=(), microphone=(self), geolocation=()',
           },
         ],
       },
