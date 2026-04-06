@@ -1,4 +1,4 @@
-const CACHE_NAME = 'car-wala-v1'
+const CACHE_NAME = 'car-wala-v2'
 const urlsToCache = [
   '/',
   '/Car Wala.png',
