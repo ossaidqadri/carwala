@@ -10,6 +10,7 @@ import type { Metadata } from "next"
 import { ElevenLabsWidget } from "@/components/ElevenLabsWidget"
 
 export const dynamic = 'force-static'
+export const revalidate = 3600 // Revalidate home page every hour
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Home",

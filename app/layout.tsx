@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/next"
 import { TRPCProvider } from "@/components/providers"
 import { Toaster } from "sonner"
 import { WhatsAppWidget } from "@/components/WhatsAppWidget"
-import { PwaProvider } from "@/components/PwaProvider"
 import { ErrorBoundary } from "@/components/ErrorBoundary"
 import { defaultMetadata } from "@/lib/metadata"
 import "./globals.css"
@@ -26,14 +25,14 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <ErrorBoundary>
-          <PwaProvider>
+          {/* <PwaProvider> */}
             <TRPCProvider>
               {children}
               <WhatsAppWidget />
               <Analytics />
               <Toaster />
             </TRPCProvider>
-          </PwaProvider>
+          {/* </PwaProvider> */}
         </ErrorBoundary>
       </body>
     </html>

@@ -56,6 +56,8 @@ const comparisonImages = [
   },
 ]
 
+export const revalidate = 3600 // Revalidate gallery every hour
+
 export default function GalleryPage() {
   return (
     <>
