@@ -73,9 +73,10 @@ export function ElevenLabsWidget({ agentId }: { agentId: string }) {
     <>
       {/* @ts-ignore */}
       <elevenlabs-convai agent-id={agentId} />
+      <link rel="preload" href="https://unpkg.com/@elevenlabs/convai-widget-embed" as="script" />
       <Script
         src="https://unpkg.com/@elevenlabs/convai-widget-embed"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
     </>
   )
