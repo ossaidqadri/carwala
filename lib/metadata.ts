@@ -61,6 +61,9 @@ export const defaultMetadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  other: {
+    "facebook-domain-verification": "mjjdu5mt0rst8aqrrypyvo5e0nn6nc",
+  },
 }
 
 export function generatePageMetadata({
