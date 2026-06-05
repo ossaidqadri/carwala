@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Header } from '../components/home/Header';
+import { Footer } from '../components/home/Footer';
+import { Pricing } from '../components/Pricing';
+import ElevenLabsWidget from '../components/ElevenLabsWidget';
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://carwala.com';
+const pageTitle = 'Services & Pricing';
+const pageDescription = 'Professional car wash and detailing packages in Karachi. Choose from Silver, Gold, Platinum, Detailed and Diamond packages.';
+const pageImage = '/premium-car-detailing-polishing-and-protection.jpg';
+const pageUrl = '/services';
+---
+
+<BaseLayout
+  title={`${pageTitle} | Car Wala`}
+  description={pageDescription}
+>
+  <Header client:load />
+  <main class="min-h-screen bg-background pt-[80px]">
+    <Pricing client:load />
+  </main>
+  <Footer client:load />
+  <ElevenLabsWidget client:idle agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
+</BaseLayout>

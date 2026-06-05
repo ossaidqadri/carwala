@@ -1,7 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { Button } from '../ui/button';
-import type { CalcomBookingResponse } from '../../types/booking';
+import type {
+  CalcomBookingResponse,
+  RescheduleRequest,
+  CancelRequest,
+} from '@/types/booking';
+import { Calendar } from './calendar';
+import { BookingForm } from './booking-form/booking-form';
+import { BookingSuccess } from './booking-success';
+import { CancelConfirmationModal } from './modals/cancel-confirmation-modal';
+import { RescheduleConfirmationModal } from './modals/reschedule-confirmation-modal';
+import { ErrorModal } from './modals/error-modal';
 
 type BookingStep = 'calendar' | 'form' | 'success' | 'reschedule' | 'cancelled';
 
@@ -41,27 +51,86 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [booking, setBooking] = useState<CalcomBookingResponse | null>(null);
   const [userTimezone, setUserTimezone] = useState<string>('');
+  const [showCancelDialog, setShowCancelDialog] = useState(false);
+  const [showRescheduleDialog, setShowRescheduleDialog] = useState(false);
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [cancelCountdown, setCancelCountdown] = useState(5);
+  const [isRescheduled, setIsRescheduled] = useState(false);
+  const [pendingRescheduleSlot, setPendingRescheduleSlot] = useState<
+    string | null
+  >(null);
+  const [isConfirmingReschedule, setIsConfirmingReschedule] = useState(false);
+  const [isCancellingMeeting, setIsCancellingMeeting] = useState(false);
+
+  const activeEventTypeId = selectedService?.eventTypeId || eventTypeId || '';
+  const activeEventLength = selectedService?.duration || eventLength;
+
+  const widgetRef = useRef<HTMLDivElement>(null);
+  const hasUserInteracted = useRef(false);
 
   useEffect(() => {
     const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     setUserTimezone(browserTimezone);
   }, []);
 
+  useEffect(() => {
+    if (hasUserInteracted.current && widgetRef.current) {
+      setTimeout(() => {
+        if (widgetRef.current) {
+          const headerHeight = 175;
+          const margin = 20;
+          const targetPosition =
+            widgetRef.current.offsetTop - headerHeight - margin;
+
+          window.scrollTo({
+            top: Math.max(0, targetPosition),
+            behavior: 'smooth',
+          });
+        }
+      }, 100);
+    }
+  }, [currentStep]);
+
+  useEffect(() => {
+    if (currentStep === 'cancelled') {
+      const interval = setInterval(() => {
+        setCancelCountdown((prev) => {
+          if (prev <= 1) {
+            setCurrentStep('calendar');
+            setBooking(null);
+            setSelectedSlot(null);
+            return 5;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(interval);
+    } else {
+      setCancelCountdown(5);
+    }
+  }, [currentStep]);
+
   const handleServiceChange = (service: ServiceOption) => {
     setSelectedService(service);
   };
 
   const handleSlotSelect = (slot: string) => {
+    hasUserInteracted.current = true;
     setSelectedSlot(slot);
     setCurrentStep('form');
   };
 
   const handleBookingSuccess = (bookingData: CalcomBookingResponse) => {
+    hasUserInteracted.current = true;
     setBooking(bookingData);
+    setIsRescheduled(false);
     setCurrentStep('success');
   };
 
   const handleBackToCalendar = () => {
+    hasUserInteracted.current = true;
     setSelectedSlot(null);
     setCurrentStep('calendar');
   };
@@ -69,151 +138,200 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({
   const handleNewBooking = () => {
     setSelectedSlot(null);
     setBooking(null);
+    setIsRescheduled(false);
     setCurrentStep('calendar');
   };
 
   const handleReschedule = () => {
+    hasUserInteracted.current = true;
     setCurrentStep('reschedule');
   };
 
   const handleCancel = () => {
     if (!booking?.uid) return;
-    // Cancel logic would go here
+    setShowCancelDialog(true);
   };
 
-  const handleFormSubmit = async (formData: FormData) => {
-    if (!selectedSlot) return;
+  const confirmCancel = async () => {
+    if (!booking?.uid) return;
 
-    const bookingData = {
-      eventTypeId: selectedService?.eventTypeId || eventTypeId,
-      start: selectedSlot,
-      attendee: {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        timeZone: userTimezone,
-      },
-    };
+    setIsCancellingMeeting(true);
 
     try {
-      const response = await fetch('/api/booking-calendar/book', {
+      const cancelData: CancelRequest = {
+        bookingUid: booking.uid,
+        cancellationReason: 'Cancelled by user',
+      };
+
+      const response = await fetch('/api/booking-calendar/cancel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(bookingData),
+        body: JSON.stringify(cancelData),
       });
 
-      if (!response.ok) throw new Error('Failed to create booking');
+      if (!response.ok) throw new Error('Failed to cancel booking');
+
+      hasUserInteracted.current = true;
+      setShowCancelDialog(false);
+      setCurrentStep('cancelled');
+    } catch (error) {
+      console.error('Cancel error:', error);
+      setShowCancelDialog(false);
+      setErrorMessage(
+        'Failed to cancel the meeting. Please use the cancellation link in your booking confirmation email to cancel this meeting.'
+      );
+      setShowErrorDialog(true);
+    } finally {
+      setIsCancellingMeeting(false);
+    }
+  };
+
+  const handleRescheduleSlotSelect = (slot: string) => {
+    setPendingRescheduleSlot(slot);
+    setShowRescheduleDialog(true);
+  };
+
+  const confirmReschedule = async () => {
+    if (!booking?.uid || !pendingRescheduleSlot) return;
+
+    setIsConfirmingReschedule(true);
+
+    try {
+      const rescheduleData: RescheduleRequest = {
+        bookingUid: booking.uid,
+        start: pendingRescheduleSlot,
+        reschedulingReason: 'User requested reschedule',
+      };
+
+      const response = await fetch('/api/booking-calendar/reschedule', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(rescheduleData),
+      });
+
+      if (!response.ok) throw new Error('Failed to reschedule booking');
 
       const result = await response.json();
-      const bookingResult = result.data || result;
-      handleBookingSuccess(bookingResult);
+      const updatedBooking = result.data || result;
+      hasUserInteracted.current = true;
+      setBooking(updatedBooking);
+      setIsRescheduled(true);
+      setShowRescheduleDialog(false);
+      setPendingRescheduleSlot(null);
+      setCurrentStep('success');
     } catch (error) {
-      console.error('Booking error:', error);
+      console.error('Reschedule error:', error);
+      setShowRescheduleDialog(false);
+      setPendingRescheduleSlot(null);
+      setErrorMessage(
+        'Failed to reschedule the meeting. Please use the rescheduling link in your booking confirmation email to reschedule this meeting.'
+      );
+      setShowErrorDialog(true);
+    } finally {
+      setIsConfirmingReschedule(false);
     }
   };
 
   return (
-    <div className="mx-auto w-full max-w-3xl">
+    <div ref={widgetRef} className="mx-auto w-full max-w-3xl">
       {currentStep === 'calendar' && (
-        <div className="bg-card rounded-2xl border border-border shadow p-4 sm:p-6">
-          <div className="mb-6">
-            {showHeader && (
-              <div className="mb-6">
-                <h2 className="text-xl font-bold font-heading">{title}</h2>
-                {description && (
-                  <p className="mt-1 text-sm text-muted-foreground">{description}</p>
-                )}
-              </div>
-            )}
-            {services && services.length > 0 && (
-              <div className="mb-4">
-                <label className="text-sm font-medium mb-2 block">Select Package</label>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  {services.map((service) => (
-                    <button
-                      key={service.id}
-                      onClick={() => handleServiceChange(service)}
-                      className={`p-3 border rounded-lg text-left transition-colors ${
-                        selectedService?.id === service.id
-                          ? 'border-primary bg-primary/5'
-                          : 'border-border hover:border-primary/50'
-                      }`}
-                    >
-                      <div className="font-medium text-sm">{service.name}</div>
-                      <div className="text-xs text-muted-foreground">{service.duration} min</div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="text-center py-8 text-muted-foreground">
-            <p>Calendar component loading...</p>
-            <p className="text-sm mt-2">Select a date and time slot</p>
-          </div>
-        </div>
+        <Calendar
+          eventTypeId={activeEventTypeId}
+          onSlotSelect={handleSlotSelect}
+          title={title}
+          description={description}
+          showHeader={showHeader}
+          userTimezone={userTimezone}
+          onTimezoneChange={setUserTimezone}
+          services={services}
+          onServiceChange={handleServiceChange}
+          initialServiceId={selectedService?.id}
+        />
       )}
 
       {currentStep === 'form' && selectedSlot && (
-        <div className="bg-card rounded-2xl border border-border shadow p-4 sm:p-6">
-          <button onClick={handleBackToCalendar} className="flex items-center gap-2 mb-4 text-sm text-muted-foreground hover:text-foreground">
-            <X className="w-4 h-4" /> Back
-          </button>
-          <h2 className="text-xl font-bold mb-6">Complete Your Booking</h2>
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            const formData = new FormData(e.currentTarget);
-            handleFormSubmit(formData);
-          }} className="space-y-4">
-            <div>
-              <label className="text-sm font-medium block mb-1">Name</label>
-              <input name="name" required className="w-full border border-input rounded-md px-3 py-2" />
-            </div>
-            <div>
-              <label className="text-sm font-medium block mb-1">Email</label>
-              <input name="email" type="email" required className="w-full border border-input rounded-md px-3 py-2" />
-            </div>
-            <div>
-              <label className="text-sm font-medium block mb-1">Phone</label>
-              <input name="phone" type="tel" required className="w-full border border-input rounded-md px-3 py-2" />
-            </div>
-            <div>
-              <label className="text-sm font-medium block mb-1">Notes (optional)</label>
-              <textarea name="notes" className="w-full border border-input rounded-md px-3 py-2 min-h-[80px]" />
-            </div>
-            <Button type="submit" className="w-full" size="lg">Confirm Booking</Button>
-          </form>
-        </div>
+        <BookingForm
+          selectedSlot={selectedSlot}
+          eventTypeId={activeEventTypeId}
+          eventLength={activeEventLength}
+          userTimezone={userTimezone}
+          onSuccess={handleBookingSuccess}
+          onBack={handleBackToCalendar}
+        />
+      )}
+
+      {currentStep === 'reschedule' && booking && (
+        <Calendar
+          eventTypeId={activeEventTypeId}
+          onSlotSelect={handleRescheduleSlotSelect}
+          title="Reschedule Appointment"
+          description="Please select a new time for your car detailing appointment."
+          showHeader={true}
+          userTimezone={userTimezone}
+          onTimezoneChange={setUserTimezone}
+        />
       )}
 
       {currentStep === 'success' && booking && (
-        <div className="bg-card rounded-2xl border border-border shadow-xl p-6 text-center">
-          <div className="mb-6 flex justify-center">
-            <div className="rounded-full bg-green-500/10 p-4">
-              <svg className="h-12 w-12 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
+        <BookingSuccess
+          booking={booking}
+          userTimezone={userTimezone}
+          onReschedule={handleReschedule}
+          onCancel={handleCancel}
+          onNewBooking={handleNewBooking}
+          isRescheduled={isRescheduled}
+        />
+      )}
+
+      {currentStep === 'cancelled' && (
+        <div className="bg-card rounded-2xl border border-border shadow-xl">
+          <div className="p-6 text-center">
+            <div className="mb-6 flex justify-center">
+              <div className="rounded-full bg-red-500/10 p-4">
+                <X className="h-12 w-12 text-red-400" />
+              </div>
             </div>
-          </div>
-          <h2 className="text-2xl font-bold mb-2">Appointment Confirmed!</h2>
-          <p className="text-muted-foreground mb-6">Check your email for confirmation details.</p>
-          <div className="space-y-3">
-            <Button onClick={handleNewBooking} className="w-full" size="lg">Book Another</Button>
+            <h2 className="mb-2 text-2xl font-bold text-foreground">
+              Appointment Cancelled
+            </h2>
+            <p className="mb-6 text-muted-foreground">
+              Your appointment has been successfully cancelled.
+            </p>
+            <p className="mb-6 text-sm text-muted-foreground">
+              Returning to calendar in {cancelCountdown} seconds...
+            </p>
+            <Button onClick={handleNewBooking} className="w-full max-w-sm">
+              Book Another Appointment
+            </Button>
           </div>
         </div>
       )}
 
-      {currentStep === 'cancelled' && (
-        <div className="bg-card rounded-2xl border border-border shadow-xl p-6 text-center">
-          <div className="mb-6 flex justify-center">
-            <div className="rounded-full bg-red-500/10 p-4">
-              <X className="h-12 w-12 text-red-400" />
-            </div>
-          </div>
-          <h2 className="text-2xl font-bold mb-2">Appointment Cancelled</h2>
-          <p className="text-muted-foreground mb-6">Your appointment has been cancelled.</p>
-          <Button onClick={handleNewBooking} className="w-full">Book Another Appointment</Button>
-        </div>
-      )}
+      <CancelConfirmationModal
+        isOpen={showCancelDialog}
+        onClose={() => setShowCancelDialog(false)}
+        onConfirm={confirmCancel}
+        isLoading={isCancellingMeeting}
+      />
+
+      <RescheduleConfirmationModal
+        isOpen={showRescheduleDialog}
+        onClose={() => {
+          setShowRescheduleDialog(false);
+          setPendingRescheduleSlot(null);
+        }}
+        onConfirm={confirmReschedule}
+        isLoading={isConfirmingReschedule}
+        booking={booking}
+        newSlot={pendingRescheduleSlot}
+        userTimezone={userTimezone}
+      />
+
+      <ErrorModal
+        isOpen={showErrorDialog}
+        onClose={() => setShowErrorDialog(false)}
+        errorMessage={errorMessage}
+      />
     </div>
   );
 };

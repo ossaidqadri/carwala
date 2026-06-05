@@ -1,0 +1,61 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+
+interface CancelConfirmationModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  isLoading: boolean;
+}
+
+export const CancelConfirmationModal: React.FC<
+  CancelConfirmationModalProps
+> = ({ isOpen, onClose, onConfirm, isLoading }) => {
+  return (
+    <AlertDialog open={isOpen} onOpenChange={onClose}>
+      <AlertDialogContent
+        className="border-border bg-card"
+        aria-describedby="cancel-description"
+      >
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-foreground">
+            Cancel Appointment
+          </AlertDialogTitle>
+          <AlertDialogDescription
+            id="cancel-description"
+            className="text-muted-foreground"
+          >
+            Are you sure you want to cancel this appointment? This action cannot be
+            undone.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <div className="flex w-full gap-3">
+            <Button
+              onClick={onClose}
+              className="flex-1"
+            >
+              Keep Appointment
+            </Button>
+            <Button
+              onClick={onConfirm}
+              className="flex-1"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Cancelling...' : 'Cancel Appointment'}
+            </Button>
+          </div>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};
