@@ -1,0 +1,15 @@
+{
+    "agents": [
+        {
+            "agent_id": "agent_0401km3y12mjf95a5h3yspgy3njr",
+            "name": "Sara",
+            "config_path": "agent_configs/sara_v1.json"
+        },
+        {
+            "config": "agent_configs\\Ahmad.json",
+            "id": "agent_0401km3y12mjf95a5h3yspgy3njr",
+            "version_id": "agtvrsn_0501kt51mnrxfqn8qgtt2tmxes5b",
+            "branch_id": "agtbrch_8101km3z0107efwtteqy6r3jt8qs"
+        }
+    ]
+}

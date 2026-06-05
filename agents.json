@@ -1,9 +1,0 @@
-{
-    "agents": [
-        {
-            "agent_id": "agent_0401km3y12mjf95a5h3yspgy3njr",
-            "name": "Sara",
-            "config_path": "agent_configs/sara_v1.json"
-        }
-    ]
-}

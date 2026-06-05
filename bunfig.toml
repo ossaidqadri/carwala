@@ -1,0 +1,4 @@
+[install]
+# pnpm-style isolated installs to catch phantom dependencies
+# Falls back to "hoisted" (npm-style) if a dep breaks; see plan risk register
+linker = "isolated"

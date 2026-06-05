@@ -1,0 +1,27 @@
+{
+  "name": "cancel_appointment",
+  "description": "Cancel an existing appointment",
+  "type": "webhook",
+  "api": {
+    "url": "https://YOUR_PRODUCTION_URL.vercel.app/api/agent/cancel",
+    "method": "POST",
+    "headers": {
+      "x-agent-token": "${AGENT_SECRET_TOKEN}",
+      "Content-Type": "application/json"
+    },
+    "body": [
+      {
+        "name": "bookingUid",
+        "description": "The booking UID from Cal.com",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "reason",
+        "description": "Reason for cancellation",
+        "type": "string",
+        "required": false
+      }
+    ]
+  }
+}
