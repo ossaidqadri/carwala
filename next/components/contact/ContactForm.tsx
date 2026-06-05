@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,19 +12,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { trpc } from "@/lib/trpc"
-import { toast } from "sonner"
-import { TRPCProvider } from "@/components/providers"
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useContactSubmit } from "@/lib/api";
+import { toast } from "sonner";
+import { QueryProvider } from "@/components/providers";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -40,7 +40,7 @@ const formSchema = z.object({
     message: "Please select a service.",
   }),
   message: z.string().optional(),
-})
+});
 
 function ContactFormInner() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,20 +52,20 @@ function ContactFormInner() {
       service: "silver",
       message: "",
     },
-  })
+  });
 
-  const submitMutation = trpc.contact.submit.useMutation({
-    onSuccess: () => {
-      toast.success("Thank you for your enquiry! We'll contact you soon.")
-      form.reset()
-    },
-    onError: (error) => {
-      toast.error(error.message || "Something went wrong. Please try again.")
-    },
-  })
+  const submitMutation = useContactSubmit();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    submitMutation.mutate(values)
+    submitMutation.mutate(values, {
+      onSuccess: () => {
+        toast.success("Thank you for your enquiry! We'll contact you soon.");
+        form.reset();
+      },
+      onError: (error) => {
+        toast.error(error.message || "Something went wrong. Please try again.");
+      },
+    });
   }
 
   return (
@@ -182,13 +182,13 @@ function ContactFormInner() {
         </div>
       </form>
     </Form>
-  )
+  );
 }
 
 export function ContactForm() {
   return (
-    <TRPCProvider>
+    <QueryProvider>
       <ContactFormInner />
-    </TRPCProvider>
-  )
+    </QueryProvider>
+  );
 }

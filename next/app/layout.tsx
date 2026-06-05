@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
-import { TRPCProvider } from "@/components/providers"
+import { QueryProvider } from "@/components/providers"
 import { Toaster } from "sonner"
 import { WhatsAppWidget } from "@/components/WhatsAppWidget"
 import { ErrorBoundary } from "@/components/ErrorBoundary"
@@ -26,12 +26,12 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <ErrorBoundary>
           {/* <PwaProvider> */}
-            <TRPCProvider>
+            <QueryProvider>
               {children}
               <WhatsAppWidget />
               <Analytics />
               <Toaster />
-            </TRPCProvider>
+            </QueryProvider>
           {/* </PwaProvider> */}
         </ErrorBoundary>
       </body>
