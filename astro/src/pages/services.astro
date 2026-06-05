@@ -18,7 +18,7 @@ const pageUrl = '/services';
 >
   <Header client:load />
   <main class="min-h-screen bg-background pt-[80px]">
-    <Pricing client:load />
+    <Pricing client:only="react" />
   </main>
   <Footer client:load />
   <ElevenLabsWidget client:idle agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />

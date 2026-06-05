@@ -1,6 +1,4 @@
-import { UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
-import { BookingFormData } from './schemas';
 
 const referralOptions = [
   { value: 'google', label: 'Google' },
@@ -10,8 +8,10 @@ const referralOptions = [
 ] as const;
 
 interface ReferralSectionProps {
-  watch: UseFormWatch<BookingFormData>;
-  setValue: UseFormSetValue<BookingFormData>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  watch: (...args: any[]) => any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setValue: (...args: any[]) => any;
 }
 
 export const ReferralSection: React.FC<ReferralSectionProps> = ({
