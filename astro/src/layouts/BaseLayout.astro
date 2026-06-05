@@ -1,0 +1,37 @@
+---
+import { QueryProvider } from '../components/QueryProvider';
+import { ErrorBoundary } from '../components/ErrorBoundary';
+import { WhatsAppWidget } from '../components/WhatsAppWidget';
+import { Toaster } from 'sonner';
+import '../styles/globals.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Professional car wash and detailing services in Karachi. Premium car care with mobile service available.' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preload" href="/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-Book.otf" as="font" type="font/otf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Montserrat/Montserrat-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Pixel-operator/PixelOperator-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Mulish/Mulish-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+  </head>
+  <body class="font-body antialiased">
+    <ErrorBoundary client:load>
+      <QueryProvider client:load>
+        <slot />
+        <WhatsAppWidget client:visible />
+        <Toaster client:load position="top-right" richColors />
+      </QueryProvider>
+    </ErrorBoundary>
+  </body>
+</html>

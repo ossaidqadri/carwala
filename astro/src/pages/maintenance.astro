@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Header } from '../components/home/Header';
+import { Footer } from '../components/home/Footer';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Button } from '../components/ui/button';
+import { Wrench, Mail, Phone, RotateCcw } from 'lucide-react';
+import { ElevenLabsWidget } from '../components/ElevenLabsWidget';
+---
+
+<BaseLayout title="Under Maintenance | Car Wala">
+  <Header client:load />
+  <main class="min-h-screen w-full flex items-center justify-center bg-background pt-[80px] p-4">
+    <Card className="w-full max-w-md border-muted shadow-lg">
+      <CardHeader className="text-center">
+        <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted">
+          <Wrench className="h-8 w-8 text-muted-foreground" />
+        </div>
+        <CardTitle className="text-2xl font-semibold">Under Maintenance</CardTitle>
+        <CardDescription className="text-base">
+          We&apos;re currently performing scheduled maintenance to improve your experience.
+        </CardDescription>
+      </CardHeader>
+      <CardContent class="space-y-6">
+        <div class="text-center text-sm text-muted-foreground">
+          <p>We apologize for the inconvenience. Our team is working hard to bring you an even better service.</p>
+          <p class="mt-2">Please check back shortly.</p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <Mail className="h-4 w-4" />
+            <a href="mailto:support@carwala.org" class="hover:text-primary transition-colors">
+              support@carwala.org
+            </a>
+          </div>
+
+          <div class="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <Phone className="h-4 w-4" />
+            <a href="tel:+923310444333" class="hover:text-primary transition-colors">
+              +92 331 0444333
+            </a>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <a href="/">
+            <Button variant="outline" className="w-full">
+              <RotateCcw className="mr-2 h-4 w-4" />
+              Back to Home
+            </Button>
+          </a>
+        </div>
+      </CardContent>
+    </Card>
+  </main>
+  <Footer />
+  <ElevenLabsWidget client:idle agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
+</BaseLayout>

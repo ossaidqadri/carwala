@@ -39,19 +39,16 @@ car-wala-monorepo
 - [x] Added `typecheck` script to `packages/schemas/package.json`
 - [x] Committed as `8ac9dd0`
 
-### ⏳ Phase C — Port Next.js to REST (NOT STARTED)
-Remaining steps:
-1. Extract `appendToSheet()` + `sendEmail()` from `next/server/routers/contact.ts` → `next/lib/contact-handlers.ts`
-2. Create `next/app/api/contact/route.ts` (REST POST endpoint)
-3. Create `next/lib/api.ts` (TanStack Query hooks replacing tRPC client)
-4. Update `next/components/providers.tsx` → `QueryProvider` (TanStack only, no tRPC)
-5. Remove tRPC deps from `next/package.json`: `@trpc/server`, `@trpc/client`, `@trpc/react-query`, `superjson`
-6. Add `@car-wala/schemas` + `@tanstack/react-query` to `next/package.json`
-7. Delete `next/server/` directory (tRPC server code)
-8. Delete `next/app/api/trpc/` directory
-9. Update `next/lib/trpc.ts` → delete (replaced by `api.ts`)
-10. Find + replace all `trpc.*.useMutation()` calls in `next/components/`
-11. Run `bun install`, `bun --filter next build`, verify contact form works
+### ✅ Phase C — Port Next.js to REST (COMPLETE, committed `422328b`)
+- [x] Extracted `appendToSheet()` + `sendEmail()` from tRPC router → `next/lib/contact-handlers.ts`
+- [x] Created `next/app/api/contact/route.ts` (REST POST, validates via `@car-wala/schemas`)
+- [x] Created `next/lib/api.ts` with `useContactSubmit()` TanStack Query hook
+- [x] Renamed `TRPCProvider` → `QueryProvider` in `providers.tsx`
+- [x] Updated `next/app/layout.tsx` import + JSX to use `QueryProvider`
+- [x] Updated `ContactForm.tsx` to use `useContactSubmit()` instead of `trpc.useMutation()`
+- [x] Removed `@trpc/*` + `superjson` from `next/package.json`, added `@car-wala/schemas: workspace:*`
+- [x] Deleted `next/server/`, `next/lib/trpc.ts`, `next/app/api/trpc/`
+- [x] `bun --filter next build` passes with no type errors
 
 ### ⏳ Phase D — Build Astro App (NOT STARTED)
 ### ⏳ Phase E — Vercel Setup (NOT STARTED)
@@ -65,6 +62,9 @@ Remaining steps:
 - **PowerShell quoting**: `bun --filter '@car-wala/schemas'` fails in PowerShell ( `@` is splat). Use `bun --filter './packages/schemas'` instead.
 - **Astro scaffolder timing**: Decided to run `bun create astro@latest` in Phase A (deviating from plan's Phase D) so we had a real directory to add to workspaces. Worked cleanly.
 - **Zod 4 `{ error: ... }` syntax**: Verified via ctx7 `/websites/zod_dev_v4` — Zod 4 deprecates `{ message: ... }` in favor of unified `{ error: ... }` param. Confirmed the plan's syntax was correct.
+- **Stale .next cache**: Deleted `.next` directory before rebuild to clear Next.js generated type files referencing deleted routes.
+- **Two-layer validation**: Contact form keeps local Zod (react-hook-form) for UX, REST endpoint re-validates with `@car-wala/schemas` for security — correct pattern.
+- **Only 2 files used tRPC**: ContactForm.tsx and providers.tsx — scoped migration kept risk low.
 
 ## What Didn't Work
 
@@ -87,30 +87,20 @@ Remaining steps:
 | Path | Purpose |
 |------|---------|
 | `D:/work/car-wala/` | Repo root |
-| `D:/work/car-wala/next/` | Next.js app (to be REST-ported) |
+| `D:/work/car-wala/next/` | Next.js app (REST-ported) ✅ |
 | `D:/work/car-wala/astro/` | Astro 6 app (to be built) |
 | `D:/work/car-wala/packages/schemas/` | Shared Zod schemas ✅ done |
 | `D:/work/car-wala/plans/` | All 3 plan docs |
 | `D:/work/car-wala/bunfig.toml` | `linker = "isolated"` |
-| `D:/work/car-wala/next/server/routers/contact.ts` | Source of truth for contact business logic |
-| `D:/work/car-wala/next/server/trpc.ts` | tRPC setup (to be deleted) |
-| `D:/work/car-wala/next/lib/trpc.ts` | tRPC client hooks (to be replaced) |
-| `D:/work/car-wala/next/components/providers.tsx` | TRPCProvider (to be replaced) |
+| `D:/work/car-wala/next/lib/contact-handlers.ts` | `appendToSheet()` + `sendEmail()` |
+| `D:/work/car-wala/next/app/api/contact/route.ts` | REST POST endpoint |
+| `D:/work/car-wala/next/lib/api.ts` | `useContactSubmit()` TanStack Query hook |
+| `D:/work/car-wala/next/components/providers.tsx` | `QueryProvider` (renamed from TRPCProvider) |
+| `D:/work/car-wala/next/components/contact/ContactForm.tsx` | Uses `useContactSubmit()` |
 
 ## Next Steps
 
-### Immediate (Phase C — Port Next.js to REST)
-1. Read `next/server/routers/contact.ts` — already done above, confirms 5 fields + `appendToSheet` + `sendEmail`
-2. Create `next/lib/contact-handlers.ts` (extract Google Sheets + Gmail logic from contact.ts router)
-3. Create `next/app/api/contact/route.ts` (REST POST, validate with `@car-wala/schemas`, call handlers)
-4. Create `next/lib/api.ts` (TanStack Query `useContactSubmit()` hook)
-5. Update `next/components/providers.tsx` → `QueryProvider`
-6. Edit `next/package.json`: remove tRPC deps, add `@car-wala/schemas`, add `@tanstack/react-query`
-7. Delete `next/server/`, `next/app/api/trpc/`, `next/lib/trpc.ts`
-8. Find all `trpc.contact.submit.useMutation()` calls in `next/components/` → replace with `useContactSubmit()`
-9. Run `bun install`, then `bun --filter next build`
-
-### Then (Phase D — Build Astro)
+### Immediate (Phase D — Build Astro)
 1. Add React integration to `astro`: `bun --filter astro add react`
 2. Add `@astrojs/vercel`, `@tanstack/react-query`, `zod`, `@car-wala/schemas`
 3. Update `astro/astro.config.mjs`: `output: 'server'`, Vercel adapter, React integration

@@ -1,0 +1,591 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@font-face {
+  font-family: 'ITC Avant Garde Gothic Pro';
+  src: url('/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-XLt.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'ITC Avant Garde Gothic Pro';
+  src: url('/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-XLight Oblique.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'ITC Avant Garde Gothic Pro';
+  src: url('/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-Book.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'ITC Avant Garde Gothic Pro';
+  src: url('/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-Book Oblique.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'ITC Avant Garde Gothic Pro';
+  src: url('/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'ITC Avant Garde Gothic Pro';
+  src: url('/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-Medium Oblique.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'ITC Avant Garde Gothic Pro';
+  src: url('/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-Demi.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'ITC Avant Garde Gothic Pro';
+  src: url('/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-Demi Oblique.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'ITC Avant Garde Gothic Pro';
+  src: url('/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'ITC Avant Garde Gothic Pro';
+  src: url('/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-Bold Oblique.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Karla';
+  src: url('/fonts/Karla/Karla-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Mulish';
+  src: url('/fonts/Mulish/Mulish-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Pixel Operator';
+  src: url('/fonts/Pixel-operator/PixelOperator-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Pixel Operator';
+  src: url('/fonts/Pixel-operator/PixelOperator.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  --font-heading: 'ITC Avant Garde Gothic Pro';
+  --font-body: 'Mulish';
+  --font-accent: 'Montserrat';
+  --font-ui: 'Montserrat';
+  --font-pixel: 'Pixel Operator';
+
+  /* Audi Brand Colors - Light Mode (Classic Showroom) */
+  --background: #FFFFFF;
+  --foreground: #101319;
+
+  --card: #F2F2F2;
+  /* Light Silver */
+  --card-foreground: #101319;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #101319;
+
+  --primary: #101319;
+  /* Black */
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #E5E5E5;
+  /* Silver */
+  --secondary-foreground: #101319;
+
+  --muted: #F2F2F2;
+  --muted-foreground: #666666;
+
+  --accent: #F2F2F2;
+  --accent-foreground: #101319;
+
+  --destructive: #D2DCE1;
+  /* Footer Background */
+  --destructive-foreground: #101319;
+
+  --border: #E5E5E5;
+  --input: #E5E5E5;
+  --ring: #101319;
+
+  --radius: 0.2rem;
+
+  /* Charts */
+  --chart-1: #D2DCE1;
+  /* Footer Background */
+  --chart-2: #101319;
+  /* Black */
+  --chart-3: #666666;
+  /* Gray */
+  --chart-4: #E5E5E5;
+  /* Silver */
+  --chart-5: #101319;
+
+  /* Sidebar */
+  --sidebar: #F2F2F2;
+  --sidebar-foreground: #101319;
+  --sidebar-primary: #101319;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #E5E5E5;
+  --sidebar-accent-foreground: #101319;
+  --sidebar-border: #E5E5E5;
+  --sidebar-ring: #101319;
+
+  --shadow-header: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  --orange-gradient: linear-gradient(135deg, #D2DCE1 0%, #B0BCC1 100%);
+  --shadow-glow: 0 0 20px rgba(210, 220, 225, 0.3);
+
+  --gold: #D4AF37;
+
+  /* Footer */
+  --footer-bg: #D2DCE1;
+  --footer-border: #000000;
+}
+
+.dark {
+  /* Audi Brand Colors - Dark Mode (Digital/Performance) */
+  --background: #101319;
+  /* Deep Charcoal */
+  --foreground: #FCFCFD;
+  /* Off-White */
+
+  --card: #181D25;
+  /* Darker Charcoal */
+  --card-foreground: #FCFCFD;
+
+  --popover: #181D25;
+  --popover-foreground: #FCFCFD;
+
+  --primary: #FCFCFD;
+  /* White */
+  --primary-foreground: #101319;
+
+  --secondary: #2A3340;
+  /* Slate Blue/Gray */
+  --secondary-foreground: #FCFCFD;
+
+  --muted: #2A3340;
+  --muted-foreground: #A0A0A0;
+
+  --accent: #2A3340;
+  --accent-foreground: #FCFCFD;
+
+  --destructive: #181D25;
+  /* Footer Background */
+  --destructive-foreground: #FCFCFD;
+
+  --border: #2A3340;
+  --input: #2A3340;
+  --ring: #FCFCFD;
+
+  /* Charts */
+  --chart-1: #181D25;
+  --chart-2: #FCFCFD;
+  --chart-3: #A0A0A0;
+  --chart-4: #2A3340;
+  --chart-5: #101319;
+
+  /* Sidebar */
+  --sidebar: #101319;
+  --sidebar-foreground: #FCFCFD;
+  --sidebar-primary: #181D25;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #2A3340;
+  --sidebar-accent-foreground: #FCFCFD;
+  --sidebar-border: #2A3340;
+  --sidebar-ring: #181D25;
+
+  /* Footer */
+  --footer-bg: #181D25;
+  --footer-border: #4A5568;
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-mono: "Geist Mono";
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-accent: var(--font-accent);
+  --font-ui: var(--font-ui);
+  --font-pixel: var(--font-pixel);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-header: var(--shadow-header);
+  --shadow-glow: var(--shadow-glow);
+
+  --color-gold: var(--gold);
+
+  /* Section specific tokens */
+  --text-section-heading: 39.7px;
+  --leading-section-heading: 50px;
+  --text-section-subheading: 16px;
+  --leading-section-subheading: 19.2px;
+  --gap-section-header: 20px;
+  --divider-height: 40px;
+
+  /* Custom Easing */
+  --ease-premium: cubic-bezier(0.25, 1, 0.33, 1);
+
+  /* Footer */
+  --color-footer-bg: var(--footer-bg);
+  --color-footer-border: var(--footer-border);
+}
+
+@layer utilities {
+  .ease-premium {
+    transition-timing-function: var(--ease-premium);
+  }
+
+  .animate-hero-fade-up {
+    animation: hero-fade-up 1s var(--ease-premium) both;
+  }
+
+  .animate-button-scan {
+    animation: button-scan 3s ease-in-out infinite alternate;
+  }
+
+  .animate-stats-number {
+    animation: stats-number-scale 1s var(--ease-premium) both;
+  }
+
+  .animate-stats-suffix {
+    animation: stats-suffix-fade 0.6s var(--ease-premium) both;
+  }
+
+  .animate-stats-glow {
+    animation: stats-glow 1.5s var(--ease-premium) 0.3s both;
+  }
+
+  .animate-why-choose-video {
+    animation: why-choose-video-zoom 8s var(--ease-premium) infinite alternate;
+  }
+
+  .animate-why-choose-icon {
+    animation: why-choose-icon-drop 0.6s var(--ease-premium) both;
+  }
+
+  .animate-why-choose-title {
+    animation: why-choose-title-slide 0.5s var(--ease-premium) both;
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+}
+
+@keyframes button-scan {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slight-twist {
+  from {
+    opacity: 0;
+    transform: translateY(30px) rotateZ(2deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateZ(0deg);
+  }
+}
+
+@keyframes stats-number-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes stats-suffix-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stats-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 0 rgba(204, 0, 0, 0);
+  }
+
+  50% {
+    text-shadow: 0 0 20px rgba(204, 0, 0, 0.3);
+  }
+}
+
+@keyframes why-choose-video-zoom {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes why-choose-icon-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+
+  60% {
+    transform: translateY(5px) scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes why-choose-title-slide {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes why-choose-border-draw {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@layer components {
+  .section-heading {
+    font-size: var(--text-section-heading);
+    line-height: var(--leading-section-heading);
+    font-weight: 500;
+  }
+
+  .section-subheading {
+    font-size: var(--text-section-subheading);
+    line-height: var(--leading-section-subheading);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+
+  /* Custom Scrollbar - Footer Color */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #D2DCE1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #101319;
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #1a1f29;
+  }
+
+  * {
+    scrollbar-width: 12px;
+    scrollbar-color: #101319 #D2DCE1;
+  }
+}

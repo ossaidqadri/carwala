@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Header } from '../components/home/Header';
+import { Footer } from '../components/home/Footer';
+import BookingWidget from '../components/booking-calendar/booking-widget';
+import ElevenLabsWidget from '../components/ElevenLabsWidget';
+
+const services = [
+  {
+    id: 'silver',
+    name: 'Silver Package',
+    eventTypeId: import.meta.env.NEXT_PUBLIC_CALCOM_EVENT_TYPE_ID || '',
+    duration: 30,
+    description: 'Essential care — exterior wash, interior vacuum & dashboard wipe',
+  },
+  {
+    id: 'gold',
+    name: 'Gold Package',
+    eventTypeId: import.meta.env.NEXT_PUBLIC_CALCOM_GOLD_EVENT_TYPE_ID || '',
+    duration: 60,
+    description: 'Premium treatment — deep clean, seat shampooing & engine bay',
+  },
+  {
+    id: 'platinum',
+    name: 'Platinum Package',
+    eventTypeId: import.meta.env.NEXT_PUBLIC_CALCOM_PLATINUM_EVENT_TYPE_ID || '',
+    duration: 90,
+    description: 'Ultimate luxury — polish, paint sealant & leather conditioning',
+  },
+  {
+    id: 'detailed',
+    name: 'Detailed Package',
+    eventTypeId: import.meta.env.NEXT_PUBLIC_CALCOM_DETAILED_EVENT_TYPE_ID || '',
+    duration: 120,
+    description: 'Complete perfection — paint correction, ceramic coating & full detail',
+  },
+  {
+    id: 'diamond',
+    name: 'Diamond Package',
+    eventTypeId: import.meta.env.NEXT_PUBLIC_CALCOM_DIAMOND_EVENT_TYPE_ID || '',
+    duration: 720,
+    description: 'The ultimate transformation — full paint correction, multi-layer ceramic coating, interior restoration, engine bay detailing & lifetime protection',
+  },
+];
+---
+
+<BaseLayout title="Book Appointment | Car Wala" description="Schedule your professional car detailing appointment online. Choose from Silver, Gold, Platinum, or Detailed packages.">
+  <Header client:load />
+  <main class="min-h-screen bg-background pt-[80px]">
+    <div class="container mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-8 lg:px-8">
+      <div class="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex-1">
+          <h1 class="text-2xl font-bold sm:text-3xl font-heading">Book Your Car Detailing Appointment</h1>
+          <p class="mt-1 text-sm text-muted-foreground sm:text-base font-body">
+            Select your preferred package and time slot — we&apos;ll take care of the rest
+          </p>
+        </div>
+      </div>
+
+      <BookingWidget
+        client:load
+        services={services}
+        title="Book Your Car Detailing Appointment"
+        description="Choose your package and pick a convenient time for your vehicle"
+        showHeader={true}
+      />
+    </div>
+  </main>
+  <Footer client:load />
+  <ElevenLabsWidget client:idle agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
+</BaseLayout>
