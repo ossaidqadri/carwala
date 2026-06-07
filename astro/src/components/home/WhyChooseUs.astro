@@ -20,13 +20,22 @@ const features = [
 ---
 
 <section class="pt-24 pb-0 bg-background">
-  <div class="container mx-auto px-4 mb-16" data-animate-section data-threshold="0.1">
+  <div class="container mx-auto px-4 mb-16">
     <div class="flex items-center justify-center gap-[var(--gap-section-header)]">
-      <h2 class="section-heading text-foreground font-heading opacity-0" data-animate="animate-hero-fade-up">
+      <h2
+        class="section-heading text-foreground font-heading animate-hero-fade-up"
+        style="animation-timeline: view(); animation-range: entry 0% entry 50%"
+      >
         Why Choose Us?
       </h2>
-      <div class="h-[var(--divider-height)] w-px bg-foreground opacity-0" data-animate="animate-hero-fade-up" style="animation-delay: 100ms"></div>
-      <div class="flex gap-[5px] section-subheading text-foreground font-body opacity-0" data-animate="animate-hero-fade-up" style="animation-delay: 200ms">
+      <div
+        class="h-[var(--divider-height)] w-px bg-foreground animate-hero-fade-up"
+        style="animation-timeline: view(); animation-range: entry 5% entry 55%"
+      ></div>
+      <div
+        class="flex gap-[5px] section-subheading text-foreground font-body animate-hero-fade-up"
+        style="animation-timeline: view(); animation-range: entry 10% entry 60%"
+      >
         <span>More</span>
         <span>Than</span>
         <span>Clean</span>
@@ -34,12 +43,11 @@ const features = [
     </div>
   </div>
 
-  <div class="container mx-auto px-4" data-animate-section data-threshold="0.2">
+  <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
       <div class="lg:col-span-4 relative min-h-[400px] bg-black overflow-hidden group">
         <video
-          class="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
-          data-animate="animate-why-choose-video"
+          class="absolute inset-0 w-full h-full object-cover motion-reduce:hidden animate-why-choose-video"
           autoplay
           muted
           loop
@@ -54,18 +62,23 @@ const features = [
       <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2">
         {features.map((feature, i) => (
           <div
-            class="group p-10 border border-border hover:bg-muted/30 transition-all duration-300 flex flex-col gap-6 h-full justify-center relative overflow-hidden opacity-0"
-            data-animate="opacity-100"
-            style={`transition-delay: ${i * 150}ms`}
+            class="group p-10 border border-border hover:bg-muted/30 transition-colors duration-300 flex flex-col gap-6 h-full justify-center relative overflow-hidden animate-hero-fade-up"
+            style={`animation-timeline: view(); animation-range: entry ${i * 5}% entry ${i * 5 + 50}%`}
           >
             <div class="absolute top-0 left-0 w-full h-[1px] bg-destructive/30 origin-left"></div>
             <div class="absolute bottom-0 right-0 w-full h-[1px] bg-destructive/30 origin-right"></div>
 
-            <div class="w-16 h-16 opacity-0" data-animate="animate-why-choose-icon" style={`animation-delay: ${i * 150}ms`}>
+            <div
+              class="w-16 h-16 animate-why-choose-icon"
+              style={`animation-timeline: view(); animation-range: entry ${i * 5}% entry ${i * 5 + 50}%`}
+            >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full text-destructive group-hover:scale-110 transition-transform duration-300" set:html={feature.icon} />
             </div>
 
-            <h3 class="text-[28px] font-heading leading-tight font-normal max-w-[280px] opacity-0" data-animate="animate-why-choose-title" style={`animation-delay: ${i * 150 + 100}ms`}>
+            <h3
+              class="text-[28px] font-heading leading-tight font-normal max-w-[280px] animate-why-choose-title"
+              style={`animation-timeline: view(); animation-range: entry ${i * 5 + 5}% entry ${i * 5 + 55}%`}
+            >
               {feature.title}
             </h3>
           </div>
@@ -74,7 +87,3 @@ const features = [
     </div>
   </div>
 </section>
-
-<script>
-  import '../../scripts/animate-on-scroll';
-</script>

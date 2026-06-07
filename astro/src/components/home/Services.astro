@@ -28,14 +28,23 @@ const services = [
 ];
 ---
 
-<section class="pt-8 pb-24 bg-background" data-animate-section data-threshold="0.1">
+<section class="pt-8 pb-24 bg-background">
   <div class="container mx-auto px-4 mb-16">
     <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-      <h2 class="text-[40px] font-heading font-medium text-foreground opacity-0" data-animate="animate-hero-fade-up">
+      <h2
+        class="text-[40px] font-heading font-medium text-foreground animate-hero-fade-up"
+        style="animation-timeline: view(); animation-range: entry 0% entry 50%"
+      >
         Our Services
       </h2>
-      <div class="hidden md:block w-px h-10 bg-foreground/20 opacity-0" data-animate="animate-hero-fade-up" style="animation-delay: 100ms"></div>
-      <div class="flex flex-wrap justify-center gap-1.5 text-[16px] font-body text-foreground/80 text-center opacity-0" data-animate="animate-hero-fade-up" style="animation-delay: 200ms">
+      <div
+        class="hidden md:block w-px h-10 bg-foreground/20 animate-hero-fade-up"
+        style="animation-timeline: view(); animation-range: entry 5% entry 55%"
+      ></div>
+      <div
+        class="flex flex-wrap justify-center gap-1.5 text-[16px] font-body text-foreground/80 text-center animate-hero-fade-up"
+        style="animation-timeline: view(); animation-range: entry 10% entry 60%"
+      >
         <span>Based in Karachi</span>
       </div>
     </div>
@@ -45,9 +54,8 @@ const services = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {services.map((service, i) => (
         <div
-          class={`group relative h-[450px] overflow-hidden cursor-pointer opacity-0 ${i === 3 ? 'lg:col-span-2' : ''}`}
-          data-animate="animate-slight-twist"
-          style={`animation-delay: ${300 + i * 100}ms`}
+          class={`group relative h-[450px] overflow-hidden cursor-pointer animate-slight-twist ${i === 3 ? 'lg:col-span-2' : ''}`}
+          style={`animation-timeline: view(); animation-range: entry ${i * 5}% entry ${i * 5 + 50}%`}
         >
           <div class="absolute inset-0">
             <img
@@ -78,9 +86,8 @@ const services = [
     <div class="flex justify-center mt-16">
       <a
         href="/calendar"
-        class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7.5 py-3.75 h-auto text-xs tracking-[1.3px] font-sans font-normal uppercase flex items-center gap-3 transition-colors opacity-0"
-        data-animate="animate-hero-fade-up"
-        style="animation-delay: 900ms"
+        class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7.5 py-3.75 h-auto text-xs tracking-[1.3px] font-sans font-normal uppercase flex items-center gap-3 transition-colors animate-hero-fade-up"
+        style="animation-timeline: view(); animation-range: entry 0% entry 50%"
       >
         <span>Book Appointment</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -90,7 +97,3 @@ const services = [
     </div>
   </div>
 </section>
-
-<script>
-  import '../../scripts/animate-on-scroll';
-</script>
