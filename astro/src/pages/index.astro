@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Header } from '../components/home/Header';
-import { Hero } from '../components/home/Hero';
-import { WhyChooseUs } from '../components/home/WhyChooseUs';
-import { Services } from '../components/home/Services';
-import { CallToAction } from '../components/home/CallToAction';
+import Hero from '../components/home/Hero.astro';
+import WhyChooseUs from '../components/home/WhyChooseUs.astro';
+import Services from '../components/home/Services.astro';
+import CallToAction from '../components/home/CallToAction.astro';
 import { Footer } from '../components/home/Footer';
 import ElevenLabsWidget from '../components/ElevenLabsWidget';
 ---
@@ -13,10 +13,10 @@ import ElevenLabsWidget from '../components/ElevenLabsWidget';
   <Header client:load />
   <main>
     <Hero />
-    <WhyChooseUs client:load />
-    <Services client:load />
+    <WhyChooseUs />
+    <Services />
     <CallToAction />
     <ElevenLabsWidget client:idle agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
   </main>
-  <Footer />
+  <Footer client:visible />
 </BaseLayout>

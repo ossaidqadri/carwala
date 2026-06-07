@@ -378,6 +378,10 @@
     animation: stats-glow 1.5s var(--ease-premium) 0.3s both;
   }
 
+  .animate-slight-twist {
+    animation: slight-twist 0.8s var(--ease-premium) both;
+  }
+
   .animate-why-choose-video {
     animation: why-choose-video-zoom 8s var(--ease-premium) infinite alternate;
   }

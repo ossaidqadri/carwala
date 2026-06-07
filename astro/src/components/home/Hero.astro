@@ -1,0 +1,74 @@
+---
+const avatars = [
+  '/media/501-homepage-007.webp',
+  '/media/501-homepage-008.webp',
+  '/media/501-homepage-009.webp',
+  '/media/501-homepage-010.webp',
+];
+---
+
+<div class="relative w-full h-screen min-h-[800px] flex items-end pb-25 overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <video
+      class="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+    >
+      <source src="/media/501-homepage-020.mp4" type="video/mp4" />
+    </video>
+    <div class="hidden motion-reduce:block absolute inset-0 z-0 bg-gradient-to-br from-gray-900 to-gray-700" />
+  </div>
+
+  <div class="container relative z-20 max-w-[1365px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-0 items-end">
+    <div class="flex flex-col gap-2.5 text-white">
+      <div class="flex flex-wrap gap-1 text-base font-body font-normal leading-[1.2] animate-hero-fade-up">
+        <span>We</span>
+        <span>don't</span>
+        <span>sell</span>
+        <span>product,</span>
+        <span>we</span>
+        <span>sell</span>
+        <span>results.</span>
+      </div>
+      <h1 class="text-5xl md:text-[65px] font-heading font-medium leading-[1.1] md:leading-[1.2] tracking-tight animate-hero-fade-up [animation-delay:100ms]">
+        Premium Car<br />Detailing in Karachi
+      </h1>
+    </div>
+
+    <div class="flex flex-col gap-7.5 text-white md:pl-20">
+      <p class="text-base font-body leading-[1.2] animate-hero-fade-up [animation-delay:200ms]">
+        Welcome to Car Wala, where we don't just clean, we transform.
+        Whether it's a luxury sedan, rugged 4x4, or a high-performance beast, your car deserves the best.
+        We deliver exceptional detailing, PPF, ceramic coatings, and more, right at our studio or at your doorstep.
+      </p>
+
+      <div class="flex flex-wrap gap-8 items-center animate-hero-fade-up [animation-delay:300ms]">
+        <a href="/services">
+          <button class="bg-white text-black hover:bg-gray-100 rounded-none px-7.5 py-3.75 h-auto text-xs font-sans tracking-[1.3px] font-normal uppercase flex items-center gap-3 transition-colors">
+            <span>View Services</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+            </svg>
+          </button>
+        </a>
+
+        <div class="flex items-center gap-5">
+          <div class="flex -space-x-2">
+            {avatars.map(src => (
+              <div class="w-10 h-10 rounded-full border-2 border-primary/30 overflow-hidden relative z-0 bg-gray-800">
+                <img src={src} class="w-full h-full object-cover" alt="" loading="lazy" decoding="async" width="40" height="40" />
+              </div>
+            ))}
+          </div>
+          <div class="text-[13.6px] leading-none font-body font-normal">
+            <p>500+ vehicles detailed</p>
+            <p>across Karachi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
