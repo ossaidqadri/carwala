@@ -13,10 +13,10 @@ export const GET: APIRoute = async ({ request }) => {
 
     const url = new URL(request.url);
     const eventTypeId = url.searchParams.get("eventTypeId");
-    const dateFrom = url.searchParams.get("dateFrom");
-    const dateTo = url.searchParams.get("dateTo");
+    const start = url.searchParams.get("dateFrom");
+    const end = url.searchParams.get("dateTo");
 
-    if (!eventTypeId || !dateFrom || !dateTo) {
+    if (!eventTypeId || !start || !end) {
       return new Response(
         JSON.stringify({ error: "Missing required query params: eventTypeId, dateFrom, dateTo" }),
         { status: 400, headers: { "Content-Type": "application/json" } }
@@ -26,7 +26,7 @@ export const GET: APIRoute = async ({ request }) => {
     const apiUrl = import.meta.env.CALCOM_API_URL;
     const apiKey = import.meta.env.CALCOM_API_KEY;
 
-    const calUrl = `${apiUrl}/v2/event-types/${eventTypeId}/slots?from=${dateFrom}&to=${dateTo}`;
+    const calUrl = `${apiUrl}/v2/slots?eventTypeId=${eventTypeId}&start=${start}&end=${end}`;
 
     const response = await fetch(calUrl, {
       method: "GET",
@@ -46,7 +46,8 @@ export const GET: APIRoute = async ({ request }) => {
       });
     }
 
-    return new Response(JSON.stringify(data), {
+    const slots = data?.data ?? {};
+    return new Response(JSON.stringify(slots), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
