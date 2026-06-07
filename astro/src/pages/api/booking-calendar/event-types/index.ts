@@ -3,7 +3,7 @@ import { applyRateLimit } from "@lib/booking-calendar/utils/rate-limiting";
 
 export const prerender = false;
 
-const CALCOM_API_VERSION = "2026-02-25";
+const CALCOM_API_VERSION = "2024-09-04";
 
 export const GET: APIRoute = async ({ request }) => {
   try {
@@ -30,7 +30,7 @@ export const GET: APIRoute = async ({ request }) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Calcom-Api-Version": CALCOM_API_VERSION,
+        "cal-api-version": CALCOM_API_VERSION,
         Authorization: `Bearer ${apiKey}`,
       },
     });
