@@ -1,28 +1,35 @@
 ---
+import { Image } from 'astro:assets';
+import bg1 from '../../assets/media/501-homepage-007.webp';
+import bg2 from '../../assets/media/501-homepage-008.webp';
+import bg3 from '../../assets/media/501-homepage-009.webp';
+import bg4 from '../../assets/media/501-homepage-010.webp';
+import bg5 from '../../assets/media/501-homepage-011.webp';
+
 const services = [
   {
     title: 'Premium Interior & Exterior Detailing',
-    bg: '/media/501-homepage-007.webp',
+    bg: bg1,
     icon: `<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>`,
   },
   {
     title: 'Paint Protection Film (PPF)',
-    bg: '/media/501-homepage-008.webp',
+    bg: bg2,
     icon: `<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>`,
   },
   {
     title: 'Paint Correction & Polishing',
-    bg: '/media/501-homepage-009.webp',
+    bg: bg3,
     icon: `<path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/>`,
   },
   {
     title: 'Ceramic Coating',
-    bg: '/media/501-homepage-010.webp',
+    bg: bg4,
     icon: `<path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/>`,
   },
   {
     title: 'Window Tinting',
-    bg: '/media/501-homepage-011.webp',
+    bg: bg5,
     icon: `<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>`,
   },
 ];
@@ -58,7 +65,7 @@ const services = [
           style={`animation-timeline: view(); animation-range: entry ${i * 5}% entry ${i * 5 + 50}%`}
         >
           <div class="absolute inset-0">
-            <img
+            <Image
               src={service.bg}
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               alt=""

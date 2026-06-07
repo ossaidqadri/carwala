@@ -4,26 +4,38 @@ import { Header } from '../components/home/Header';
 import { Footer } from '../components/home/Footer';
 import { Compare } from '../components/ui/compare';
 import ElevenLabsWidget from '../components/ElevenLabsWidget';
+import { Image } from 'astro:assets';
+
+import dirtyRearFloor from '../assets/media/Before/dirty-rear-floor.webp';
+import scratchedRoofPaint from '../assets/media/Before/scratched-roof-paint.webp';
+import muddyWheelArch from '../assets/media/Before/muddy-wheel-arch.webp';
+import dustyTruckBed from '../assets/media/Before/dusty-truck-bed.webp';
+import dirtyDriverFloorMat from '../assets/media/Before/dirty-driver-floor-mat.webp';
+import glossySidePanel from '../assets/media/After/glossy-side-panel.webp';
+import cleanTruckBed from '../assets/media/After/clean-truck-bed.webp';
+import shinyFrontGrille from '../assets/media/After/shiny-front-grille.webp';
+import polishedHoodReflection from '../assets/media/After/polished-hood-reflection.webp';
+import cleanTruckSeats from '../assets/media/After/clean-truck-seats.webp';
 
 const galleryImages = [
-  { src: '/media/Before/dirty-rear-floor.webp', alt: 'Before - Dirty rear floor with debris and stains' },
-  { src: '/media/Before/scratched-roof-paint.webp', alt: 'Before - Scratched and swirled roof paint' },
-  { src: '/media/Before/muddy-wheel-arch.webp', alt: 'Before - Muddy wheel arch and dusty tire' },
-  { src: '/media/Before/dusty-truck-bed.webp', alt: 'Before - Dusty truck bed with dirty seats' },
-  { src: '/media/Before/dirty-driver-floor-mat.webp', alt: 'Before - Dirty driver-side floor mat' },
-  { src: '/media/After/glossy-side-panel.webp', alt: 'After - Glossy black side panel with mirror finish' },
-  { src: '/media/After/clean-truck-bed.webp', alt: 'After - Clean and polished truck bed' },
-  { src: '/media/After/shiny-front-grille.webp', alt: 'After - Shiny front grille and hood' },
-  { src: '/media/After/polished-hood-reflection.webp', alt: 'After - Perfect hood reflections after polishing' },
-  { src: '/media/After/clean-truck-seats.webp', alt: 'After - Clean truck bed seats' },
+  { src: dirtyRearFloor, alt: 'Before - Dirty rear floor with debris and stains' },
+  { src: scratchedRoofPaint, alt: 'Before - Scratched and swirled roof paint' },
+  { src: muddyWheelArch, alt: 'Before - Muddy wheel arch and dusty tire' },
+  { src: dustyTruckBed, alt: 'Before - Dusty truck bed with dirty seats' },
+  { src: dirtyDriverFloorMat, alt: 'Before - Dirty driver-side floor mat' },
+  { src: glossySidePanel, alt: 'After - Glossy black side panel with mirror finish' },
+  { src: cleanTruckBed, alt: 'After - Clean and polished truck bed' },
+  { src: shinyFrontGrille, alt: 'After - Shiny front grille and hood' },
+  { src: polishedHoodReflection, alt: 'After - Perfect hood reflections after polishing' },
+  { src: cleanTruckSeats, alt: 'After - Clean truck bed seats' },
 ];
 
 const comparisonImages = [
-  { before: '/media/Before/scratched-roof-paint.webp', after: '/media/After/polished-hood-reflection.webp', title: 'Paint Correction & Polish' },
-  { before: '/media/Before/muddy-wheel-arch.webp', after: '/media/After/glossy-side-panel.webp', title: 'Exterior Detail & Wheel Clean' },
-  { before: '/media/Before/dusty-truck-bed.webp', after: '/media/After/clean-truck-bed.webp', title: 'Truck Bed Deep Clean' },
-  { before: '/media/Before/dirty-rear-floor.webp', after: '/media/After/shiny-front-grille.webp', title: 'Interior Vacuum & Detail' },
-  { before: '/media/Before/dirty-driver-floor-mat.webp', after: '/media/After/clean-truck-seats.webp', title: 'Floor Mat Restoration' },
+  { before: scratchedRoofPaint.src, after: polishedHoodReflection.src, title: 'Paint Correction & Polish' },
+  { before: muddyWheelArch.src, after: glossySidePanel.src, title: 'Exterior Detail & Wheel Clean' },
+  { before: dustyTruckBed.src, after: cleanTruckBed.src, title: 'Truck Bed Deep Clean' },
+  { before: dirtyRearFloor.src, after: shinyFrontGrille.src, title: 'Interior Vacuum & Detail' },
+  { before: dirtyDriverFloorMat.src, after: cleanTruckSeats.src, title: 'Floor Mat Restoration' },
 ];
 ---
 
@@ -74,7 +86,7 @@ const comparisonImages = [
             <div
               class="group relative aspect-square overflow-hidden rounded-lg bg-muted"
             >
-              <img
+              <Image
                 src={item.src}
                 alt={item.alt}
                 loading="lazy"

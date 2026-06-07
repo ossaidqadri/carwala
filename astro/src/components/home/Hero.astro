@@ -1,10 +1,11 @@
 ---
-const avatars = [
-  '/media/501-homepage-007.webp',
-  '/media/501-homepage-008.webp',
-  '/media/501-homepage-009.webp',
-  '/media/501-homepage-010.webp',
-];
+import { Image } from 'astro:assets';
+import avatar1 from '../../assets/media/501-homepage-007.webp';
+import avatar2 from '../../assets/media/501-homepage-008.webp';
+import avatar3 from '../../assets/media/501-homepage-009.webp';
+import avatar4 from '../../assets/media/501-homepage-010.webp';
+
+const avatars = [avatar1, avatar2, avatar3, avatar4];
 ---
 
 <div class="relative w-full h-screen min-h-[800px] flex items-end pb-25 overflow-hidden">
@@ -59,7 +60,7 @@ const avatars = [
           <div class="flex -space-x-2">
             {avatars.map(src => (
               <div class="w-10 h-10 rounded-full border-2 border-primary/30 overflow-hidden relative z-0 bg-gray-800">
-                <img src={src} class="w-full h-full object-cover" alt="" loading="lazy" decoding="async" width="40" height="40" />
+                <Image src={src} class="w-full h-full object-cover" alt="" width={40} height={40} loading="lazy" decoding="async" />
               </div>
             ))}
           </div>
