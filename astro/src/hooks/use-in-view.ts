@@ -1,10 +1,14 @@
+"use client"
+
 import { useRef, useEffect, useState } from 'react';
 
 interface UseInViewOptions extends IntersectionObserverInit {
   triggerOnce?: boolean;
 }
 
-export function useInView<T extends HTMLElement = HTMLDivElement>(options?: UseInViewOptions) {
+export function useInView<T extends HTMLElement = HTMLDivElement>(
+  options?: UseInViewOptions
+) {
   const { threshold = 0, root = null, rootMargin = '0px', triggerOnce = true } = options || {};
   const [inView, setInView] = useState(false);
   const ref = useRef<T>(null);
