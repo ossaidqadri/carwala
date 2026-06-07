@@ -18,9 +18,7 @@ export function Hero() {
         >
           <source src={img501Homepage020Mp4} type="video/mp4" />
         </video>
-        <div className="hidden motion-reduce:block absolute inset-0 z-0 bg-gradient-to-br from-gray-900 to-gray-700">
-          <div className="absolute inset-0 opacity-20 bg-[url('/media/501-homepage-020.mp4')] bg-cover bg-center" />
-        </div>
+        <div className="hidden motion-reduce:block absolute inset-0 z-0 bg-gradient-to-br from-gray-900 to-gray-700" />
       </div>
 
       <div className="container relative z-20 max-w-[1365px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-0 items-end">
@@ -65,7 +63,7 @@ export function Hero() {
                   '/media/501-homepage-010.webp',
                 ].map((src, i) => (
                   <div key={i} className="w-10 h-10 rounded-full border-2 border-primary/30 overflow-hidden relative z-0 bg-gray-800">
-                    <img src={src} className="w-full h-full object-cover" alt="" />
+                    <img src={src} className="w-full h-full object-cover" alt="" loading="lazy" decoding="async" />
                   </div>
                 ))}
               </div>
