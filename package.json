@@ -1,12 +1,16 @@
 {
   "name": "car-wala-monorepo",
   "private": true,
-  "workspaces": ["next", "astro", "packages/*"],
+  "workspaces": [
+    "next",
+    "astro",
+    "packages/*"
+  ],
   "scripts": {
     "dev:next": "bun --filter next dev",
-    "dev:astro": "bun --filter @car-wala/site dev",
+    "dev:astro": "bun --filter astro-app dev",
     "build:next": "bun --filter next build",
-    "build:astro": "bun --filter @car-wala/site build",
+    "build:astro": "bun --filter astro-app build",
     "build": "bun run build:next && bun run build:astro",
     "lint": "bun --filter '*' lint",
     "typecheck": "bun --filter '*' typecheck"
