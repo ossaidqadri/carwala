@@ -4,9 +4,9 @@
   "workspaces": ["next", "astro", "packages/*"],
   "scripts": {
     "dev:next": "bun --filter next dev",
-    "dev:astro": "bun --filter astro dev",
+    "dev:astro": "bun --filter @car-wala/site dev",
     "build:next": "bun --filter next build",
-    "build:astro": "bun --filter astro build",
+    "build:astro": "bun --filter @car-wala/site build",
     "build": "bun run build:next && bun run build:astro",
     "lint": "bun --filter '*' lint",
     "typecheck": "bun --filter '*' typecheck"

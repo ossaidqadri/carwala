@@ -1,5 +1,5 @@
 {
-  "name": "astro",
+  "name": "@car-wala/site",
   "type": "module",
   "version": "0.0.1",
   "engines": {
