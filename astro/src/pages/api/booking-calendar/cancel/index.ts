@@ -7,7 +7,9 @@ const CALCOM_API_VERSION = "2026-02-25";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    await applyRateLimit(request);
+    const ip = request.headers.get('CF-Connecting-IP') ?? request.headers.get('X-Forwarded-For') ?? '127.0.0.1';
+    const rateLimit = await applyRateLimit(ip);
+    if (!rateLimit.allowed) return rateLimit.response!;
 
     const body = await request.json();
     const { bookingUid, cancellationReason } = body;

@@ -7,14 +7,16 @@ const CALCOM_API_VERSION = "2026-02-25";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    await applyRateLimit(request);
+    const ip = request.headers.get('CF-Connecting-IP') ?? request.headers.get('X-Forwarded-For') ?? '127.0.0.1';
+    const rateLimit = await applyRateLimit(ip);
+    if (!rateLimit.allowed) return rateLimit.response!;
 
     const body = await request.json();
-    const { bookingUid, start, reschedulingReason } = body;
+    const { eventTypeId, start, attendee, metadata, bookingFieldsResponses, guests } = body;
 
-    if (!bookingUid || !start) {
+    if (!eventTypeId || !start || !attendee) {
       return new Response(
-        JSON.stringify({ error: "Missing required fields: bookingUid, start" }),
+        JSON.stringify({ error: "Missing required fields: eventTypeId, start, attendee" }),
         { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }
@@ -22,12 +24,16 @@ export const POST: APIRoute = async ({ request }) => {
     const apiUrl = import.meta.env.CALCOM_API_URL;
     const apiKey = import.meta.env.CALCOM_API_KEY;
 
-    const calUrl = `${apiUrl}/v2/bookings/${bookingUid}/reschedule`;
+    const calUrl = `${apiUrl}/v2/bookings`;
 
-    const reschedulePayload: Record<string, string> = { start };
-    if (reschedulingReason) {
-      reschedulePayload.reschedulingReason = reschedulingReason;
-    }
+    const bookingPayload = {
+      eventTypeId,
+      start,
+      attendee,
+      ...(metadata && { metadata }),
+      ...(bookingFieldsResponses && { bookingFieldsResponses }),
+      ...(guests && { guests }),
+    };
 
     const response = await fetch(calUrl, {
       method: "POST",
@@ -36,7 +42,7 @@ export const POST: APIRoute = async ({ request }) => {
         "Calcom-Api-Version": CALCOM_API_VERSION,
         Authorization: `Bearer ${apiKey}`,
       },
-      body: JSON.stringify(reschedulePayload),
+      body: JSON.stringify(bookingPayload),
     });
 
     const data = await response.json();
@@ -49,7 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     return new Response(JSON.stringify(data), {
-      status: 200,
+      status: 201,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {

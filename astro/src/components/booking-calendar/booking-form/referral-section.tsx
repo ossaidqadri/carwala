@@ -1,6 +1,6 @@
-import { UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import type { UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Label } from '../../ui/label';
-import { BookingFormData } from './schemas';
+import type { BookingFormData } from './schemas';
 
 const referralOptions = [
   { value: 'google', label: 'Google' },

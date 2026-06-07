@@ -12,7 +12,8 @@ import type {
   CalcomBookingResponse,
 } from "../../../types/booking";
 import { calculateEndTime } from "../../../lib/booking-calendar/utils/form-utils";
-import { bookingSchema, BookingFormData } from "./schemas";
+import { bookingSchema } from "./schemas";
+import type { BookingFormData } from "./schemas";
 import { AppointmentDetails } from "./appointment-details";
 import { ContactSection } from "./contact-section";
 import { ReferralSection } from "./referral-section";

@@ -25,8 +25,7 @@ function getRatelimit() {
 }
 
 export async function applyRateLimit(key: string): Promise<RateLimitResult> {
-  // Always enforce in production
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.DEV) {
     return { allowed: true };
   }
 

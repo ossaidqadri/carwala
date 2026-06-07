@@ -5,16 +5,20 @@ export const prerender = false;
 
 const CALCOM_API_VERSION = "2026-02-25";
 
-export const POST: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async ({ request }) => {
   try {
-    await applyRateLimit(request);
+    const ip = request.headers.get('CF-Connecting-IP') ?? request.headers.get('X-Forwarded-For') ?? '127.0.0.1';
+    const rateLimit = await applyRateLimit(ip);
+    if (!rateLimit.allowed) return rateLimit.response!;
 
-    const body = await request.json();
-    const { eventTypeId, start, attendee, metadata, bookingFieldsResponses, guests } = body;
+    const url = new URL(request.url);
+    const eventTypeId = url.searchParams.get("eventTypeId");
+    const dateFrom = url.searchParams.get("dateFrom");
+    const dateTo = url.searchParams.get("dateTo");
 
-    if (!eventTypeId || !start || !attendee) {
+    if (!eventTypeId || !dateFrom || !dateTo) {
       return new Response(
-        JSON.stringify({ error: "Missing required fields: eventTypeId, start, attendee" }),
+        JSON.stringify({ error: "Missing required query params: eventTypeId, dateFrom, dateTo" }),
         { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }
@@ -22,25 +26,15 @@ export const POST: APIRoute = async ({ request }) => {
     const apiUrl = import.meta.env.CALCOM_API_URL;
     const apiKey = import.meta.env.CALCOM_API_KEY;
 
-    const calUrl = `${apiUrl}/v2/bookings`;
-
-    const bookingPayload = {
-      eventTypeId,
-      start,
-      attendee,
-      ...(metadata && { metadata }),
-      ...(bookingFieldsResponses && { bookingFieldsResponses }),
-      ...(guests && { guests }),
-    };
+    const calUrl = `${apiUrl}/v2/event-types/${eventTypeId}/slots?from=${dateFrom}&to=${dateTo}`;
 
     const response = await fetch(calUrl, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         "Calcom-Api-Version": CALCOM_API_VERSION,
         Authorization: `Bearer ${apiKey}`,
       },
-      body: JSON.stringify(bookingPayload),
     });
 
     const data = await response.json();
@@ -53,7 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     return new Response(JSON.stringify(data), {
-      status: 201,
+      status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
