@@ -5,11 +5,11 @@ import { Calendar, Sparkles, Shield, Wand2, Gem, Sun } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 import Link from "next/link"
 
-const imgDivBoxBg = "/media/501-homepage-007.webp";
-const imgDivBoxBg1 = "/media/501-homepage-008.webp";
-const imgDivBoxBg2 = "/media/501-homepage-009.webp";
-const imgDivBoxBg3 = "/media/501-homepage-010.webp";
-const imgDivBoxBg4 = "/media/501-homepage-011.webp";
+const imgDivBoxBg = "/media/avatar-customer-1.webp";
+const imgDivBoxBg1 = "/media/avatar-customer-2.webp";
+const imgDivBoxBg2 = "/media/avatar-customer-3.webp";
+const imgDivBoxBg3 = "/media/avatar-customer-4.webp";
+const imgDivBoxBg4 = "/media/service-window-tinting.webp";
 
 export function Services() {
   const services = [

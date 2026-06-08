@@ -3,7 +3,7 @@
 import { Wrench, Truck, UserCheck, Award } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 
-const img501Homepage003Mp4 = "/media/501-homepage-003.mp4";
+const img501Homepage003Mp4 = "/media/why-choose-us-video.mp4";
 
 const features = [
   {

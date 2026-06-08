@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 
 const imgDivRowBg = "https://www.figma.com/api/mcp/asset/4c72266c-c3c5-4d50-ac94-c7eb03383897";
-const img501Homepage020Mp4 = "/media/501-homepage-020.mp4";
+const heroCarDetailVideoMp4 = "/media/hero-car-detail-video.mp4";
 
 export function Hero() {
   return (
@@ -18,11 +18,11 @@ export function Hero() {
           playsInline
           preload="metadata"
         >
-          <source src={img501Homepage020Mp4} type="video/mp4" />
+          <source src={heroCarDetailVideoMp4} type="video/mp4" />
         </video>
         {/* Fallback image for reduced-motion users */}
         <div className="hidden motion-reduce:block absolute inset-0 z-0 bg-gradient-to-br from-gray-900 to-gray-700">
-          <div className="absolute inset-0 opacity-20 bg-[url('/media/501-homepage-020.mp4')] bg-cover bg-center" />
+          <div className="absolute inset-0 opacity-20 bg-[url('/media/hero-car-detail-video.mp4')] bg-cover bg-center" />
         </div>
       </div>
 
@@ -66,10 +66,10 @@ export function Hero() {
             <div className="flex items-center gap-5">
                <div className="flex -space-x-2">
                   {[
-                    "/media/501-homepage-007.webp",
-                    "/media/501-homepage-008.webp",
-                    "/media/501-homepage-009.webp",
-                    "/media/501-homepage-010.webp"
+                    "/media/avatar-customer-1.webp",
+                    "/media/avatar-customer-2.webp",
+                    "/media/avatar-customer-3.webp",
+                    "/media/avatar-customer-4.webp"
                   ].map((src, i) => (
                     <div key={i} className="w-10 h-10 rounded-full border-2 border-primary/30 overflow-hidden relative z-0 bg-gray-800">
                       <img src={src} className="w-full h-full object-cover" alt="" />

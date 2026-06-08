@@ -1,9 +1,10 @@
 ---
 import { Image } from 'astro:assets';
-import avatar1 from '../../assets/media/501-homepage-007.webp';
-import avatar2 from '../../assets/media/501-homepage-008.webp';
-import avatar3 from '../../assets/media/501-homepage-009.webp';
-import avatar4 from '../../assets/media/501-homepage-010.webp';
+import { ArrowUpRight } from '@lucide/astro';
+import avatar1 from '../../assets/media/avatar-customer-1.webp';
+import avatar2 from '../../assets/media/avatar-customer-2.webp';
+import avatar3 from '../../assets/media/avatar-customer-3.webp';
+import avatar4 from '../../assets/media/avatar-customer-4.webp';
 
 const avatars = [avatar1, avatar2, avatar3, avatar4];
 ---
@@ -18,7 +19,7 @@ const avatars = [avatar1, avatar2, avatar3, avatar4];
       playsinline
       preload="metadata"
     >
-      <source src="/media/501-homepage-020.mp4" type="video/mp4" />
+      <source src="/media/hero-car-detail-video.mp4" type="video/mp4" />
     </video>
     <div class="hidden motion-reduce:block absolute inset-0 z-0 bg-gradient-to-br from-gray-900 to-gray-700" />
   </div>
@@ -50,9 +51,7 @@ const avatars = [avatar1, avatar2, avatar3, avatar4];
         <a href="/services">
           <button class="bg-white text-black hover:bg-gray-100 rounded-none px-7.5 py-3.75 h-auto text-xs font-sans tracking-[1.3px] font-normal uppercase flex items-center gap-3 transition-colors">
             <span>View Services</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
-            </svg>
+            <ArrowUpRight size={20} />
           </button>
         </a>
 

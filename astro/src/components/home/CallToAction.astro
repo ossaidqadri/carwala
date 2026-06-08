@@ -1,4 +1,5 @@
 ---
+import { ArrowRight } from '@lucide/astro';
 ---
 
 <section class="relative py-32 overflow-hidden">
@@ -11,7 +12,7 @@
       playsinline
       preload="metadata"
     >
-      <source src="/media/501-homepage-021.mp4" type="video/mp4" />
+      <source src="/media/cta-car-transform-video.mp4" type="video/mp4" />
     </video>
     <div class="hidden motion-reduce:block absolute inset-0 z-0 bg-gradient-to-br from-gray-900 to-gray-700" />
   </div>
@@ -32,9 +33,7 @@
     <div class="flex justify-center">
       <a href="/calendar" class="bg-white text-black hover:bg-gray-100 rounded-none px-7.5 py-3.75 h-auto text-xs tracking-[1.3px] font-normal uppercase flex items-center gap-3 transition-colors">
         <span>Book Appointment</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
-        </svg>
+        <ArrowRight size={20} />
       </a>
     </div>
   </div>
