@@ -5,50 +5,46 @@ import { Calendar, Sparkles, Shield, Wand2, Gem, Sun } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 import Link from "next/link"
 
-const imgDivBoxBg = "/media/avatar-customer-1.webp";
-const imgDivBoxBg1 = "/media/avatar-customer-2.webp";
-const imgDivBoxBg2 = "/media/avatar-customer-3.webp";
-const imgDivBoxBg3 = "/media/avatar-customer-4.webp";
-const imgDivBoxBg4 = "/media/service-window-tinting.webp";
+const services = [
+  {
+    title: "Premium Interior & Exterior Detailing",
+    description: "Deep clean, seat shampooing, engine bay wash, and interior sanitization.",
+    icon: Sparkles,
+  },
+  {
+    title: "Paint Protection Film (PPF)",
+    description: "Invisible armor shields your paint from scratches, stone chips, and UV damage.",
+    icon: Shield,
+  },
+  {
+    title: "Paint Correction & Polishing",
+    description: "Multi-stage compounding and polishing to restore factory-fresh gloss.",
+    icon: Wand2,
+  },
+  {
+    title: "Ceramic Coating",
+    description: "Semi-permanent nano-ceramic barrier for long-lasting gloss and hydrophobic protection.",
+    icon: Gem,
+  },
+  {
+    title: "Window Tinting",
+    description: "Professional-grade tint for heat rejection, UV protection, and privacy.",
+    icon: Sun,
+  },
+]
 
 export function Services() {
-  const services = [
-    {
-      title: "Premium Interior & Exterior Detailing",
-      icon: Sparkles,
-      bg: imgDivBoxBg
-    },
-    {
-      title: "Paint Protection Film (PPF)",
-      icon: Shield,
-      bg: imgDivBoxBg1
-    },
-    {
-      title: "Paint Correction & Polishing",
-      icon: Wand2,
-      bg: imgDivBoxBg2
-    },
-    {
-      title: "Ceramic Coating",
-      icon: Gem,
-      bg: imgDivBoxBg3
-    },
-    {
-      title: "Window Tinting",
-      icon: Sun,
-      bg: imgDivBoxBg4
-    }
-  ];
-
-  const { ref: sectionRef, inView } = useInView({ threshold: 0.1 });
+  const { ref: sectionRef, inView } = useInView({ threshold: 0.1 })
 
   return (
     <section ref={sectionRef} className="pt-8 pb-24 bg-background">
       <div className="container mx-auto px-4 mb-16">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-          <h2 className={`text-[40px] font-heading font-medium text-foreground ${inView ? 'animate-hero-fade-up' : 'opacity-0'}`}>Our Services</h2>
-          <div className={`hidden md:block w-px h-10 bg-foreground/20 ${inView ? 'animate-hero-fade-up delay-100' : 'opacity-0'}`}></div>
-          <div className={`flex flex-wrap justify-center gap-1.5 text-[16px] font-body text-foreground/80 text-center ${inView ? 'animate-hero-fade-up delay-200' : 'opacity-0'}`}>
+          <h2 className={`text-[40px] font-heading font-medium text-foreground ${inView ? "animate-hero-fade-up" : "opacity-0"}`}>
+            Our Services
+          </h2>
+          <div className={`hidden md:block w-px h-10 bg-foreground/20 ${inView ? "animate-hero-fade-up delay-100" : "opacity-0"}`} />
+          <div className={`flex flex-wrap justify-center gap-1.5 text-[16px] font-body text-foreground/80 text-center ${inView ? "animate-hero-fade-up delay-200" : "opacity-0"}`}>
             <span>Based in Karachi</span>
           </div>
         </div>
@@ -59,35 +55,19 @@ export function Services() {
           {services.map((service, i) => (
             <div
               key={i}
-              className={`group relative h-[450px] overflow-hidden cursor-pointer ${i === 3 ? 'lg:col-span-2' : ''} ${inView ? `animate-slight-twist delay-${300 + i * 100}` : 'opacity-0'}`}
+              className={`group relative flex flex-col gap-4 p-8 bg-muted/30 border border-border rounded-sm overflow-hidden cursor-pointer ${i === 3 ? "lg:col-span-2" : ""} ${inView ? `animate-hero-fade-up delay-${300 + i * 100}` : "opacity-0"}`}
               style={{ animationDelay: `${300 + i * 100}ms` }}
             >
-              {/* Background Image */}
-              <div className="absolute inset-0">
-                <img 
-                  src={service.bg} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                  alt="" 
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-90" />
+              <div className="w-10 h-10 text-foreground">
+                <service.icon className="w-full h-full" />
               </div>
-
-              {/* Content */}
-              <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end h-full">
-                <div className="w-10 h-10 mb-6 relative">
-                  <service.icon className="w-full h-full text-white" />
-                </div>
-                <h3 className="text-[30px] font-heading font-normal text-white leading-tight">
+              <div>
+                <h3 className="text-[22px] font-heading font-normal text-foreground leading-tight mb-2">
                   {service.title}
                 </h3>
-
-                {/* Borders for corner effect */}
-                <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-                  <div className="absolute top-0 left-0 w-full h-full border border-white/10 group-hover:border-white/30 transition-colors"></div>
-                </div>
+                <p className="text-sm font-body text-foreground/70 leading-relaxed">
+                  {service.description}
+                </p>
               </div>
             </div>
           ))}
@@ -95,7 +75,7 @@ export function Services() {
 
         <div className="flex justify-center mt-16">
           <Link href="/calendar">
-            <Button className={`bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7.5 py-3.75 h-auto text-xs tracking-[1.3px] font-sans font-normal uppercase flex items-center gap-3 transition-colors ${inView ? 'animate-hero-fade-up delay-900' : 'opacity-0'}`}>
+            <Button className={`bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7.5 py-3.75 h-auto text-xs tracking-[1.3px] font-sans font-normal uppercase flex items-center gap-3 transition-colors ${inView ? "animate-hero-fade-up delay-900" : "opacity-0"}`}>
               <span>Book Appointment</span>
               <Calendar className="w-5 h-5" />
             </Button>

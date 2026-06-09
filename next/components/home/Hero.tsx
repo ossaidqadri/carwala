@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button"
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 
-const imgDivRowBg = "https://www.figma.com/api/mcp/asset/4c72266c-c3c5-4d50-ac94-c7eb03383897";
 const heroCarDetailVideoMp4 = "/media/hero-car-detail-video.mp4";
 
 export function Hero() {
