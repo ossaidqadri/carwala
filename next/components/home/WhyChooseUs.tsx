@@ -3,7 +3,7 @@
 import { Wrench, Truck, UserCheck, Award } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 
-const img501Homepage003Mp4 = "/media/why-choose-us-video.mp4";
+const whyChooseUsVideoMp4 = "/media/why-choose-us-video.mp4";
 
 const features = [
   {
@@ -54,7 +54,7 @@ export function WhyChooseUs() {
               playsInline
               preload="metadata"
             >
-              <source src={img501Homepage003Mp4} type="video/mp4" />
+              <source src={whyChooseUsVideoMp4} type="video/mp4" />
             </video>
             {/* Fallback static background for reduced-motion users */}
             <div className="hidden motion-reduce:block absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-700" />
