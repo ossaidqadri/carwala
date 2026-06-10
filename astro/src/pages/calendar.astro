@@ -69,5 +69,5 @@ const initialServiceId = Astro.url.searchParams.get('service');
       />
     </div>
   </main>
-  <Footer client:visible />
+  <Footer client:only="react" />
 </BaseLayout>
