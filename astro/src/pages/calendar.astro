@@ -47,7 +47,7 @@ const initialServiceId = Astro.url.searchParams.get('service');
 ---
 
 <BaseLayout title="Book Appointment | Car Wala">
-  <Header />
+  <Header client:only="react" />
   <main class="min-h-screen bg-background pt-[80px]">
     <div class="container mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-8 lg:px-8">
       <div class="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">

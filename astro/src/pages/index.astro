@@ -11,7 +11,7 @@ import ElevenLabsWidget from '../components/ElevenLabsWidget';
 ---
 
 <BaseLayout title="Premium Car Detailing in Karachi | Car Wala">
-  <Header client:load />
+  <Header client:only="react" />
   <main>
     <Hero />
     <WhyChooseUs />
@@ -19,5 +19,5 @@ import ElevenLabsWidget from '../components/ElevenLabsWidget';
     <CallToAction />
     <ElevenLabsWidget client:idle agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
   </main>
-  <Footer client:visible />
+  <Footer client:only="react" />
 </BaseLayout>

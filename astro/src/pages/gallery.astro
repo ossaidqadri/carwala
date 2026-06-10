@@ -41,7 +41,7 @@ const comparisonImages = [
 ---
 
 <BaseLayout title="Car Detailing Gallery | Car Wala" description="View our expert car detailing transformations in Karachi - paint correction, ceramic coating, PPF & more.">
-  <Header client:load />
+  <Header client:only="react" />
   <main class="min-h-screen bg-background pt-[80px]">
     <div class="container mx-auto px-4 py-12">
       <div class="mb-12 text-center">
@@ -61,7 +61,7 @@ const comparisonImages = [
           {comparisonImages.map((comparison, i) => (
             <div class="flex flex-col items-center">
               <Compare
-                client:visible
+                client:only="react"
                 firstImage={comparison.after}
                 secondImage={comparison.before}
                 firstImageClassName="object-cover w-full h-full"
