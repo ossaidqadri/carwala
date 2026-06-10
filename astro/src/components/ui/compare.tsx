@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { cn } from '../../lib/utils';
+import { HandGrab } from '@lucide/astro';
 
 interface CompareProps {
   firstImage?: string;
@@ -140,11 +141,7 @@ export function Compare({
       >
         {showHandlebar && (
           <div className="h-5 w-5 rounded-md top-1/2 -translate-y-1/2 bg-white z-30 absolute -left-2.5 flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF40]">
-            <div className="flex flex-col gap-0.5">
-              <div className="w-3 h-0.5 bg-black"></div>
-              <div className="w-3 h-0.5 bg-black"></div>
-              <div className="w-3 h-0.5 bg-black"></div>
-            </div>
+            <HandGrab size={14} className="text-black" />
           </div>
         )}
       </div>
