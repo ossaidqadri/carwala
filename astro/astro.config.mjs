@@ -10,7 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
-  adapter: vercel({ imageService: true }),
+  adapter: vercel({ imageService: false }),
   integrations: [react()],
   vite: {
     resolve: {
