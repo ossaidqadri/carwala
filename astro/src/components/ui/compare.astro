@@ -1,0 +1,210 @@
+---
+import { Image } from 'astro:assets';
+
+interface CompareProps {
+  firstImage: ImageMetadata;
+  secondImage: ImageMetadata;
+  className?: string;
+  firstImageClassName?: string;
+  secondImageClassname?: string;
+  initialSliderPercentage?: number;
+  slideMode?: 'hover' | 'drag';
+  showHandlebar?: boolean;
+  autoplay?: boolean;
+  autoplayDuration?: number;
+}
+
+const {
+  firstImage,
+  secondImage,
+  className = 'w-[400px] h-[400px]',
+  firstImageClassName = 'object-cover w-full h-full',
+  secondImageClassname = 'object-cover w-full h-full',
+  initialSliderPercentage = 50,
+  slideMode = 'hover',
+  showHandlebar = true,
+  autoplay = false,
+  autoplayDuration = 5000,
+} = Astro.props;
+
+const sliderId = `slider-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div
+  id={sliderId}
+  class={`overflow-hidden relative ${className}`}
+  style={`cursor: ${slideMode === 'drag' ? 'grab' : 'col-resize'};`}
+  data-slider-mode={slideMode}
+  data-slider-percent={initialSliderPercentage}
+  data-autoplay={autoplay}
+  data-autoplay-duration={autoplayDuration}
+>
+  <!-- Slider Line -->
+  <div
+    class="slider-line h-full w-0.5 absolute top-0 m-auto bg-gradient-to-b from-transparent via-white to-transparent"
+    style="left: 50%; z-index: 40;"
+  >
+    {showHandlebar && (
+      <div class="h-5 w-5 rounded-md top-1/2 -translate-y-1/2 bg-white z-30 absolute -left-2.5 flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF40]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-black">
+          <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
+          <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/>
+          <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/>
+          <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
+        </svg>
+      </div>
+    )}
+  </div>
+
+  <!-- First Image (left side clipped) -->
+  <div class="overflow-hidden w-full h-full relative z-20 pointer-events-none">
+    <div
+      class="absolute inset-0 z-20 rounded-lg shrink-0 w-full h-full select-none overflow-hidden"
+      data-first-image-wrapper
+    >
+      <Image
+        src={firstImage}
+        alt="first image"
+        class={`absolute inset-0 z-20 rounded-lg shrink-0 w-full h-full select-none ${firstImageClassName}`}
+        draggable={false}
+      />
+    </div>
+  </div>
+
+  <!-- Second Image (background) -->
+  <Image
+    src={secondImage}
+    alt="second image"
+    class={`absolute top-0 left-0 z-[19] rounded-lg w-full h-full select-none ${secondImageClassname}`}
+    draggable={false}
+  />
+</div>
+
+<style>
+  .slider-line {
+    transition: left 0.05s ease-out;
+  }
+</style>
+
+<script>
+  function initCompare() {
+    document.querySelectorAll<HTMLElement>('[id^="slider-"]').forEach((container) => {
+      if (container.dataset.compareInit) return;
+      container.dataset.compareInit = 'true';
+
+      const sliderLine = container.querySelector<HTMLElement>('.slider-line');
+      if (!sliderLine) return;
+
+      const mode = container.dataset.sliderMode as 'hover' | 'drag' || 'hover';
+      const initialPercent = parseFloat(container.dataset.sliderPercent || '50');
+      const autoplay = container.dataset.autoplay === 'true';
+      const autoplayDuration = parseInt(container.dataset.autoplayDuration || '5000', 10);
+
+      let sliderPercent = initialPercent;
+      let isDragging = false;
+      let isMouseOver = false;
+      let autoplayTimer: ReturnType<typeof setTimeout> | null = null;
+      let animationFrame: number | null = null;
+
+      const updateSlider = (percent: number) => {
+        sliderPercent = Math.max(0, Math.min(100, percent));
+        if (sliderLine) {
+          sliderLine.style.left = `${sliderPercent}%`;
+        }
+        const firstWrapper = container.querySelector<HTMLElement>('[data-first-image-wrapper]');
+        if (firstWrapper) {
+          firstWrapper.style.clipPath = `inset(0 ${100 - sliderPercent}% 0 0)`;
+        }
+      };
+
+      const startAutoplay = () => {
+        if (!autoplay) return;
+        const startTime = Date.now();
+        const animate = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = (elapsed % (autoplayDuration * 2)) / autoplayDuration;
+          const percent = progress <= 1 ? progress * 100 : (2 - progress) * 100;
+          updateSlider(percent);
+          autoplayTimer = setTimeout(animate, 16);
+        };
+        animate();
+      };
+
+      const stopAutoplay = () => {
+        if (autoplayTimer) {
+          clearTimeout(autoplayTimer);
+          autoplayTimer = null;
+        }
+      };
+
+      const handleMove = (clientX: number) => {
+        const rect = container.getBoundingClientRect();
+        const x = clientX - rect.left;
+        const percent = (x / rect.width) * 100;
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+        animationFrame = requestAnimationFrame(() => updateSlider(percent));
+      };
+
+      container.addEventListener('mousemove', (e) => {
+        if (mode === 'hover' || (mode === 'drag' && isDragging)) {
+          handleMove((e as MouseEvent).clientX);
+        }
+      });
+
+      container.addEventListener('mouseleave', () => {
+        isMouseOver = false;
+        if (mode === 'hover') {
+          updateSlider(initialPercent);
+        }
+        if (mode === 'drag') {
+          isDragging = false;
+        }
+        if (autoplay) startAutoplay();
+      });
+
+      container.addEventListener('mouseenter', () => {
+        isMouseOver = true;
+        stopAutoplay();
+      });
+
+      container.addEventListener('mousedown', (e) => {
+        if (mode === 'drag') {
+          isDragging = true;
+          handleMove((e as MouseEvent).clientX);
+        }
+      });
+
+      container.addEventListener('mouseup', () => {
+        if (mode === 'drag') {
+          isDragging = false;
+        }
+      });
+
+      container.addEventListener('touchstart', (e) => {
+        if (!autoplay) {
+          if (mode === 'drag') isDragging = true;
+          handleMove((e as TouchEvent).touches[0].clientX);
+        }
+      }, { passive: true });
+
+      container.addEventListener('touchend', () => {
+        if (!autoplay && mode === 'drag') {
+          isDragging = false;
+        }
+      });
+
+      container.addEventListener('touchmove', (e) => {
+        if (!autoplay) {
+          handleMove((e as TouchEvent).touches[0].clientX);
+        }
+      }, { passive: true });
+
+      // Init
+      updateSlider(initialPercent);
+      if (autoplay) startAutoplay();
+    });
+  }
+
+  initCompare();
+  document.addEventListener('astro:after-swap', initCompare);
+</script>

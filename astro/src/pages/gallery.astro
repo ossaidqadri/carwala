@@ -3,7 +3,7 @@ export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Header } from '../components/home/Header';
 import { Footer } from '../components/home/Footer';
-import { Compare } from '../components/ui/compare';
+import Compare from '../components/ui/compare.astro';
 import ElevenLabsWidget from '../components/ElevenLabsWidget';
 import { Image } from 'astro:assets';
 
@@ -32,11 +32,11 @@ const galleryImages = [
 ];
 
 const comparisonImages = [
-  { before: scratchedRoofPaint.src, after: polishedHoodReflection.src, title: 'Paint Correction & Polish' },
-  { before: muddyWheelArch.src, after: glossySidePanel.src, title: 'Exterior Detail & Wheel Clean' },
-  { before: dustyTruckBed.src, after: cleanTruckBed.src, title: 'Truck Bed Deep Clean' },
-  { before: dirtyRearFloor.src, after: shinyFrontGrille.src, title: 'Interior Vacuum & Detail' },
-  { before: dirtyDriverFloorMat.src, after: cleanTruckSeats.src, title: 'Floor Mat Restoration' },
+  { before: scratchedRoofPaint, after: polishedHoodReflection, title: 'Paint Correction & Polish' },
+  { before: muddyWheelArch, after: glossySidePanel, title: 'Exterior Detail & Wheel Clean' },
+  { before: dustyTruckBed, after: cleanTruckBed, title: 'Truck Bed Deep Clean' },
+  { before: dirtyRearFloor, after: shinyFrontGrille, title: 'Interior Vacuum & Detail' },
+  { before: dirtyDriverFloorMat, after: cleanTruckSeats, title: 'Floor Mat Restoration' },
 ];
 ---
 
@@ -61,7 +61,6 @@ const comparisonImages = [
           {comparisonImages.map((comparison, i) => (
             <div class="flex flex-col items-center">
               <Compare
-                client:only="react"
                 firstImage={comparison.after}
                 secondImage={comparison.before}
                 firstImageClassName="object-cover w-full h-full"
