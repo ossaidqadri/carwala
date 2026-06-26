@@ -12,10 +12,19 @@ export const CalendarDayButton: React.FC<CalendarDayButtonProps> = ({
   day,
   onDateSelect,
 }) => {
+  const fullDateLabel = day.date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
   return (
     <button
       onClick={() => !day.disabled && onDateSelect(day.date)}
       disabled={day.disabled}
+      aria-selected={day.isSelected}
+      aria-label={fullDateLabel}
       className={`relative aspect-square rounded-lg p-2 text-sm font-medium transition-all ${
         day.isSelected
           ? "bg-primary text-primary-foreground"

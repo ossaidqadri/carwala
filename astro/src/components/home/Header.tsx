@@ -41,6 +41,8 @@ export function Header() {
           <div className="flex md:hidden items-center justify-start flex-1">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               className="text-foreground text-[12px] font-accent font-normal tracking-[1.4px] uppercase hover:opacity-60 transition-opacity w-[60px] text-left"
             >
               {isMobileMenuOpen ? 'CLOSE' : 'MENU'}
@@ -118,9 +120,10 @@ export function Header() {
 
       {isMobileMenuOpen && (
         <>
-          <div
+          <button
             className="fixed inset-0 top-[60px] z-30 bg-black/20 md:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
+            aria-label="Close menu"
           />
 
           <div
@@ -129,21 +132,18 @@ export function Header() {
             <nav className="flex flex-col">
               <a
                 href="/"
-                onClick={() => setIsMobileMenuOpen(false)}
                 className="flex h-[56px] items-center px-[20px] text-foreground text-[28px] font-heading font-normal hover:text-primary transition-colors border-b border-foreground/20"
               >
                 Home
               </a>
               <a
                 href="/pricing"
-                onClick={() => setIsMobileMenuOpen(false)}
                 className="flex h-[56px] items-center px-[20px] text-foreground text-[28px] font-heading font-normal hover:text-primary transition-colors border-b border-foreground/20"
               >
                 Pricing
               </a>
               <a
                 href="/gallery"
-                onClick={() => setIsMobileMenuOpen(false)}
                 className="flex h-[56px] items-center px-[20px] text-foreground text-[28px] font-heading font-normal hover:text-primary transition-colors border-b border-foreground/20"
               >
                 Gallery

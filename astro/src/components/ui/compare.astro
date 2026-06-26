@@ -45,7 +45,7 @@ const sliderId = `slider-${Math.random().toString(36).slice(2, 9)}`;
     style="left: 50%; z-index: 40;"
   >
     {showHandlebar && (
-      <div class="h-5 w-5 rounded-md top-1/2 -translate-y-1/2 bg-white z-30 absolute -left-2.5 flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF40]">
+      <div class="h-5 w-5 rounded-md top-1/2 -translate-y-1/2 bg-white z-30 absolute -left-2.5 flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF40]" aria-label="Compare slider">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-black">
           <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
           <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/>
@@ -64,7 +64,7 @@ const sliderId = `slider-${Math.random().toString(36).slice(2, 9)}`;
     >
       <Image
         src={firstImage}
-        alt="first image"
+        alt="Before treatment result"
         class={`absolute inset-0 z-20 rounded-lg shrink-0 w-full h-full select-none ${firstImageClassName}`}
         draggable={false}
       />
@@ -74,7 +74,7 @@ const sliderId = `slider-${Math.random().toString(36).slice(2, 9)}`;
   <!-- Second Image (background) -->
   <Image
     src={secondImage}
-    alt="second image"
+    alt="After treatment result"
     class={`absolute top-0 left-0 z-[19] rounded-lg w-full h-full select-none ${secondImageClassname}`}
     draggable={false}
   />
@@ -179,6 +179,18 @@ const sliderId = `slider-${Math.random().toString(36).slice(2, 9)}`;
           isDragging = false;
         }
       });
+
+      // Keyboard support for drag mode
+      if (mode === 'drag') {
+        container.setAttribute('tabindex', '0');
+        container.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') {
+            updateSlider(sliderPercent - 2);
+          } else if (e.key === 'ArrowRight') {
+            updateSlider(sliderPercent + 2);
+          }
+        });
+      }
 
       container.addEventListener('touchstart', (e) => {
         if (!autoplay) {

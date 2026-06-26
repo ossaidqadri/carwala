@@ -31,6 +31,7 @@ export const ContactSection = <T extends FieldValues>({ control }: ContactSectio
                 <Input
                   type="text"
                   placeholder="Your full name"
+                  autocomplete="name"
                   {...field}
                   className="h-12 bg-muted text-foreground border-border focus-visible:border-blue-500 focus-visible:ring-blue-500/50"
                 />
@@ -50,6 +51,7 @@ export const ContactSection = <T extends FieldValues>({ control }: ContactSectio
                 <Input
                   type="email"
                   placeholder="your@email.com"
+                  autocomplete="email"
                   {...field}
                   className="h-12 bg-muted text-foreground border-border focus-visible:border-blue-500 focus-visible:ring-blue-500/50"
                 />
@@ -68,7 +70,7 @@ export const ContactSection = <T extends FieldValues>({ control }: ContactSectio
           <FormItem>
             <FormControl>
               <Textarea
-                placeholder="Tell us about your vehicle (make, model, year) and any specific concerns..."
+                placeholder="Tell us about your vehicle (make, model, year) and any specific concerns…"
                 {...field}
                 rows={5}
                 className="h-36 resize-none bg-muted text-foreground border-border focus-visible:border-blue-500 focus-visible:ring-blue-500/50"

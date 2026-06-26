@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, BadgeCheck } from "lucide-react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 
 type VehicleType = "Hatchback" | "Sedan" | "Crossover" | "Pickups" | "SUVs";
@@ -85,18 +85,19 @@ const pricingData: PricingPlan[] = [
 
 export function Pricing() {
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleType>("Sedan");
+  const shouldReduceMotion = useReducedMotion();
 
   const cardVariants = {
     hidden: {
       opacity: 0,
-      y: 80,
+      y: shouldReduceMotion ? 0 : 80,
     },
     visible: (index: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        delay: index * 0.2,
-        duration: 0.6,
+        delay: shouldReduceMotion ? 0 : index * 0.2,
+        duration: shouldReduceMotion ? 0 : 0.6,
         ease: [0.25, 0.46, 0.45, 0.94] as const,
       },
     }),
@@ -129,6 +130,7 @@ export function Pricing() {
               <button
                 key={type}
                 onClick={() => setSelectedVehicle(type)}
+                aria-pressed={selectedVehicle === type}
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
                   selectedVehicle === type
@@ -183,18 +185,19 @@ export function Pricing() {
                         </p>
                       </div>
 
-                      <a href={`/calendar?service=${items.serviceId}`}>
-                        <Button
-                          className="relative bg-white hover:bg-white hover:text-black dark:hover:text-black text-black text-sm font-medium rounded-full h-12 p-1 ps-6 pe-14 group transition-all duration-500 hover:ps-14 hover:pe-6 w-fit overflow-hidden"
-                        >
+                      <Button
+                        asChild
+                        className="relative bg-white hover:bg-white hover:text-black dark:hover:text-black text-black text-sm font-medium rounded-full h-12 p-1 ps-6 pe-14 group transition-all duration-500 hover:ps-14 hover:pe-6 w-fit overflow-hidden"
+                      >
+                        <a href={`/calendar?service=${items.serviceId}`}>
                           <span className="relative z-10 transition-all duration-500">
                             Book This Service
                           </span>
                           <div className="absolute right-1 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center transition-all duration-500 group-hover:right-[calc(100%-44px)] group-hover:rotate-45">
                             <ArrowUpRight size={16} />
                           </div>
-                        </Button>
-                      </a>
+                        </a>
+                      </Button>
 
                       <Separator />
 

@@ -570,7 +570,7 @@
     @apply font-heading;
   }
 
-  /* Custom Scrollbar - Footer Color */
+  /* Custom Scrollbar - Light and Dark Mode */
   ::-webkit-scrollbar {
     width: 12px;
   }
@@ -591,5 +591,34 @@
   * {
     scrollbar-width: 12px;
     scrollbar-color: #101319 #D2DCE1;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    ::-webkit-scrollbar-track {
+      background: #1a1f29;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #D2DCE1;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #e0e6eb;
+    }
+
+    * {
+      scrollbar-color: #D2DCE1 #1a1f29;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

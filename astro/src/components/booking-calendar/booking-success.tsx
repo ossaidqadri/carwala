@@ -105,7 +105,7 @@ export const BookingSuccess: React.FC<BookingSuccessProps> = ({
   const calendarLinks = generateCalendarLinks();
 
   return (
-    <div className="bg-card rounded-2xl border border-border shadow-xl">
+    <div className="bg-card rounded-2xl border border-border shadow-xl" aria-live="polite">
       <div className="p-4 text-center sm:p-6">
         {/* Success Icon */}
         <div className="mb-6 flex justify-center">

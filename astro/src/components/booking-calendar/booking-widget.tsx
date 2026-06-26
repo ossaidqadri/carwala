@@ -235,7 +235,7 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({
   };
 
   return (
-    <div ref={widgetRef} className="mx-auto w-full max-w-3xl">
+    <div ref={widgetRef} className="mx-auto w-full max-w-3xl" aria-live="polite">
       {currentStep === 'calendar' && (
         <Calendar
           eventTypeId={activeEventTypeId}

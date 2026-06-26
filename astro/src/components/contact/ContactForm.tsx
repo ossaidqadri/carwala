@@ -86,7 +86,7 @@ function ContactFormInner() {
               <FormItem>
                 <FormLabel>Full Name *</FormLabel>
                 <FormControl>
-                  <Input placeholder="John Doe" {...field} />
+                  <Input placeholder="John Doe…" autocomplete="name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -99,7 +99,7 @@ function ContactFormInner() {
               <FormItem>
                 <FormLabel>Email Address *</FormLabel>
                 <FormControl>
-                  <Input placeholder="john@example.com" {...field} />
+                  <Input placeholder="john@example.com…" autocomplete="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -115,7 +115,7 @@ function ContactFormInner() {
               <FormItem>
                 <FormLabel>Phone Number *</FormLabel>
                 <FormControl>
-                  <Input placeholder="(555) 123-4567" {...field} />
+                  <Input type="tel" placeholder="(555) 123-4567…" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -172,7 +172,7 @@ function ContactFormInner() {
             className="bg-accent text-accent-foreground hover:opacity-90 w-full md:w-auto"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Sending...' : 'Send Enquiry'}
+            {isSubmitting ? 'Sending…' : 'Send Enquiry'}
           </Button>
           <Button
             type="button"

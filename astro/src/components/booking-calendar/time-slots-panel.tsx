@@ -90,7 +90,7 @@ export const TimeSlotsPanel: React.FC<TimeSlotsPanelProps> = ({
       </div>
 
       <div className="relative">
-        <div className="scrollbar-thin scrollbar-track-muted scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground max-h-64 overflow-y-auto px-4 pb-4 sm:max-h-96 sm:px-6">
+        <div className="scrollbar-thin scrollbar-track-muted scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground max-h-64 overflow-y-auto px-4 pb-4 sm:max-h-96 sm:px-6" aria-live="polite">
           <div className="space-y-2">
             {!selectedDate ? (
               <p className="text-sm text-muted-foreground">

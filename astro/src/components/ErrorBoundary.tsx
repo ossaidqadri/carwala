@@ -40,6 +40,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             </p>
             <button
               onClick={this.handleRetry}
+              aria-label="Try again"
               className="bg-primary text-primary-foreground px-6 py-2.5 text-sm font-sans tracking-wide uppercase hover:opacity-90 transition-opacity"
             >
               Try again

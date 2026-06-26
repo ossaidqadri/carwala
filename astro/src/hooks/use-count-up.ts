@@ -32,6 +32,13 @@ export function useCountUp(
   };
 
   useEffect(() => {
+    // Skip animation if user prefers reduced motion
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setCount(target);
+      setIsComplete(true);
+      return;
+    }
+
     const timeoutId = setTimeout(() => {
       const animate = (timestamp: number) => {
         if (!startTimeRef.current) {

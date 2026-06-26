@@ -144,7 +144,7 @@ export const BookingForm: React.FC<BookingFormProps> = ({
               disabled={loading}
               size='lg'
               className="flex-1 cursor-pointer">
-              {loading ? "Confirming..." : "Confirm"}
+              {loading ? "Confirming…" : "Confirm"}
             </Button>
           </div>
 
@@ -152,6 +152,7 @@ export const BookingForm: React.FC<BookingFormProps> = ({
             By sending, you agree to our{" "}
             <a
               href="/privacy-policy"
+              rel="noopener noreferrer"
               className="font-medium text-foreground underline hover:text-blue-400 transition-colors">
               Privacy policy
             </a>{" "}

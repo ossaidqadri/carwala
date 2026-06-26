@@ -18,7 +18,8 @@ const pageUrl = '/pricing';
   description={pageDescription}
 >
   <Header client:load />
-  <main class="min-h-screen bg-background pt-[80px]">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:outline-none">Skip to main content</a>
+  <main id="main-content" class="min-h-screen bg-background pt-[80px]">
     <Pricing client:only="react" />
   </main>
   <Footer />
