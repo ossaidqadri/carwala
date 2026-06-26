@@ -17,10 +17,10 @@ const pageUrl = '/services';
   title={`${pageTitle} | Car Wala`}
   description={pageDescription}
 >
-  <Header client:only="react" />
+  <Header client:load />
   <main class="min-h-screen bg-background pt-[80px]">
     <Pricing client:only="react" />
   </main>
-  <Footer client:only="react" />
+  <Footer />
   <ElevenLabsWidget client:idle agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
 </BaseLayout>

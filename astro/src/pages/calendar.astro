@@ -21,20 +21,6 @@ const SERVICES = [
     description: "Premium treatment — deep clean, seat shampooing & engine bay",
   },
   {
-    id: "platinum",
-    name: "Platinum Package",
-    eventTypeId: import.meta.env.PUBLIC_CALCOM_PLATINUM_EVENT_TYPE_ID || "",
-    duration: 90,
-    description: "Ultimate luxury — polish, paint sealant & leather conditioning",
-  },
-  {
-    id: "detailed",
-    name: "Detailed Package",
-    eventTypeId: import.meta.env.PUBLIC_CALCOM_DETAILED_EVENT_TYPE_ID || "",
-    duration: 120,
-    description: "Complete perfection — paint correction, ceramic coating & full detail",
-  },
-  {
     id: "diamond",
     name: "Diamond Package",
     eventTypeId: import.meta.env.PUBLIC_CALCOM_DIAMOND_EVENT_TYPE_ID || "",
@@ -47,7 +33,7 @@ const initialServiceId = Astro.url.searchParams.get('service');
 ---
 
 <BaseLayout title="Book Appointment | Car Wala">
-  <Header client:only="react" />
+  <Header client:load />
   <main class="min-h-screen bg-background pt-[80px]">
     <div class="container mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-8 lg:px-8">
       <div class="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
@@ -69,5 +55,5 @@ const initialServiceId = Astro.url.searchParams.get('service');
       />
     </div>
   </main>
-  <Footer client:only="react" />
+  <Footer />
 </BaseLayout>

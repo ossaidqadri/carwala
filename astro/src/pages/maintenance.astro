@@ -10,7 +10,7 @@ import ElevenLabsWidget from '../components/ElevenLabsWidget';
 ---
 
 <BaseLayout title="Under Maintenance | Car Wala">
-  <Header client:only="react" />
+  <Header client:load />
   <main class="min-h-screen w-full flex items-center justify-center bg-background pt-[80px] p-4">
     <Card className="w-full max-w-md border-muted shadow-lg">
       <CardHeader className="text-center">
@@ -55,6 +55,6 @@ import ElevenLabsWidget from '../components/ElevenLabsWidget';
       </CardContent>
     </Card>
   </main>
-  <Footer client:only="react" />
+  <Footer />
   <ElevenLabsWidget client:idle agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
 </BaseLayout>

@@ -41,7 +41,7 @@ const comparisonImages = [
 ---
 
 <BaseLayout title="Car Detailing Gallery | Car Wala" description="View our expert car detailing transformations in Karachi - paint correction, ceramic coating, PPF & more.">
-  <Header client:only="react" />
+  <Header client:load />
   <main class="min-h-screen bg-background pt-[80px]">
     <div class="container mx-auto px-4 py-12">
       <div class="mb-12 text-center">
@@ -99,6 +99,6 @@ const comparisonImages = [
       </section>
     </div>
   </main>
-  <Footer client:only="react" />
+  <Footer />
   <ElevenLabsWidget client:idle agentId="agent_0401km3y12mjf95a5h3yspgy3njr" />
 </BaseLayout>
