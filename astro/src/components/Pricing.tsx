@@ -102,9 +102,7 @@ export function Pricing() {
     }),
   };
 
-  const getPrice = (plan: PricingPlan) => {
-    return plan.plan_price[selectedVehicle] ?? null;
-  };
+  const getPrice = (plan: PricingPlan) => plan.plan_price[selectedVehicle];
 
   return (
     <section className="bg-background py-10 xl:py-0">
@@ -147,6 +145,7 @@ export function Pricing() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             {pricingData?.map((items: PricingPlan, index: number) => {
               const price = getPrice(items);
+              if (!price) return null;
               return (
                 <motion.div
                   key={index}
@@ -179,21 +178,14 @@ export function Pricing() {
                         <p className="text-xs font-normal text-muted-foreground uppercase tracking-wider">
                           {selectedVehicle} Price
                         </p>
-                        {price !== null ? (
-                          <p className="text-4xl sm:text-5xl font-semibold text-card-foreground">
-                            PKR {price.toLocaleString()}
-                          </p>
-                        ) : (
-                          <p className="text-2xl font-semibold text-muted-foreground">
-                            Not Available
-                          </p>
-                        )}
+                        <p className="text-4xl sm:text-5xl font-semibold text-card-foreground">
+                          PKR {price.toLocaleString()}
+                        </p>
                       </div>
 
                       <a href={`/calendar?service=${items.serviceId}`}>
                         <Button
-                          disabled={price === null}
-                          className="relative bg-white hover:bg-white hover:text-black dark:hover:text-black text-black text-sm font-medium rounded-full h-12 p-1 ps-6 pe-14 group transition-all duration-500 hover:ps-14 hover:pe-6 w-fit overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="relative bg-white hover:bg-white hover:text-black dark:hover:text-black text-black text-sm font-medium rounded-full h-12 p-1 ps-6 pe-14 group transition-all duration-500 hover:ps-14 hover:pe-6 w-fit overflow-hidden"
                         >
                           <span className="relative z-10 transition-all duration-500">
                             Book This Service

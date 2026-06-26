@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
+import tailwindcss from '@tailwindcss/vite';
 import { fileURLToPath } from 'url';
 import { resolve, dirname } from 'path';
 
@@ -13,6 +14,7 @@ export default defineConfig({
   adapter: vercel({ imageService: false }),
   integrations: [react()],
   vite: {
+    plugins: [tailwindcss()],
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src'),
