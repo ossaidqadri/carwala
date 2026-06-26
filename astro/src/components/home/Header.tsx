@@ -30,8 +30,8 @@ export function Header() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border transition-colors duration-200">
         <div className="h-[60px] md:h-[60px] flex items-center justify-between px-[20px] md:px-[30px] relative z-50 bg-white">
           <nav className="hidden md:flex items-center gap-[25px]">
-            <a href="/services" className="text-foreground text-[15px] font-accent font-medium tracking-wide uppercase hover:text-primary transition-colors">
-              SERVICES
+            <a href="/pricing" className="text-foreground text-[15px] font-accent font-medium tracking-wide uppercase hover:text-primary transition-colors">
+              PRICING
             </a>
             <a href="/gallery" className="text-foreground text-[15px] font-accent font-medium tracking-wide uppercase hover:text-primary transition-colors">
               GALLERY
@@ -135,11 +135,11 @@ export function Header() {
                 Home
               </a>
               <a
-                href="/services"
+                href="/pricing"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex h-[56px] items-center px-[20px] text-foreground text-[28px] font-heading font-normal hover:text-primary transition-colors border-b border-foreground/20"
               >
-                Services
+                Pricing
               </a>
               <a
                 href="/gallery"

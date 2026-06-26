@@ -37,7 +37,7 @@ export function Footer() {
           <nav className="flex flex-col gap-3">
             <span className="text-xs font-accent uppercase tracking-widest opacity-60 mb-1">Navigate</span>
             {[
-              { name: 'Services', href: '/services' },
+              { name: 'Pricing', href: '/pricing' },
               { name: 'Gallery', href: '/gallery' },
               { name: 'Why Us', href: '#why-us' },
               { name: 'Book Now', href: '/calendar' },
