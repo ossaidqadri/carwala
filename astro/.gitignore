@@ -25,3 +25,13 @@ pnpm-debug.log*
 
 # Cloudflare Wrangler local state and cache
 .wrangler/
+
+# untracked
+.codex/
+agent_configs/
+tool_configs/
+tools.json
+tasks/
+tests.json
+astro/.tmp-dev-err.log
+astro/.tmp-dev-out.log
