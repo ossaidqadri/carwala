@@ -17,7 +17,7 @@ const avatars = [avatar1, avatar2, avatar3, avatar4];
       muted
       loop
       playsinline
-      preload="metadata"
+      preload="auto"
       aria-label="Hero background video"
     >
       <source src="/media/hero-car-detail-video.mp4" type="video/mp4" />
@@ -58,7 +58,7 @@ const avatars = [avatar1, avatar2, avatar3, avatar4];
           <div class="flex -space-x-2">
             {avatars.map(src => (
               <div class="w-10 h-10 rounded-full border-2 border-primary/30 overflow-hidden relative z-0 bg-gray-800">
-                <Image src={src} class="w-full h-full object-cover" alt="" width={40} height={40} loading="lazy" decoding="async" />
+                <Image src={src} class="w-full h-full object-cover" alt="" width={40} height={40} />
               </div>
             ))}
           </div>

@@ -48,10 +48,10 @@ const { title, description = 'Professional car wash and detailing services in Ka
   </head>
   <body class="font-body antialiased">
     <ErrorBoundary client:load>
-      <QueryProvider client:load>
+      <QueryProvider client:idle>
         <slot />
         <WhatsAppWidget client:visible />
-        <Toaster client:load position="top-right" richColors />
+        <Toaster client:idle position="top-right" richColors />
       </QueryProvider>
     </ErrorBoundary>
   </body>

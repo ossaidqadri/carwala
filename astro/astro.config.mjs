@@ -15,6 +15,13 @@ export default defineConfig({
   output: 'server',
   adapter: vercel({ imageService: false }),
   integrations: [react(), sitemap()],
+  routeRules: {
+    '/': { cache: { maxAge: 3600, staleWhileRevalidate: 86400 } },
+    '/pricing': { cache: { maxAge: 3600, staleWhileRevalidate: 86400 } },
+    '/gallery': { cache: { maxAge: 7200, staleWhileRevalidate: 86400 } },
+    '/maintenance': { cache: { maxAge: 3600, staleWhileRevalidate: 86400 } },
+    '/calendar': { isr: 300 },
+  },
   vite: {
     plugins: [tailwindcss()],
     resolve: {
