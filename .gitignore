@@ -45,3 +45,4 @@ plans/
 prompt-*
 VERIFICATION_REPORT.md
 verification-result.json
+.codex/
