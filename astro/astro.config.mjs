@@ -12,7 +12,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // https://astro.build/config
 export default defineConfig({
   site: 'https://carwala.org',
-  output: 'server',
+  output: 'static',
   adapter: vercel({ imageService: true }),
   integrations: [react(), sitemap()],
   fonts: [
