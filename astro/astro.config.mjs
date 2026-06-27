@@ -12,7 +12,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // https://astro.build/config
 export default defineConfig({
   site: 'https://carwala.org',
-  output: 'server',
+  output: 'static',
   adapter: vercel({ imageService: true }),
   integrations: [react(), sitemap()],
   fonts: [
@@ -65,7 +65,6 @@ export default defineConfig({
     '/pricing': { cache: { maxAge: 3600, staleWhileRevalidate: 86400 } },
     '/gallery': { cache: { maxAge: 7200, staleWhileRevalidate: 86400 } },
     '/maintenance': { cache: { maxAge: 3600, staleWhileRevalidate: 86400 } },
-    '/calendar': { isr: 300 },
   },
   vite: {
     plugins: [tailwindcss()],
