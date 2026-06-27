@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { contactSchema, sanitizeContactInput } from '@car-wala/schemas';
+import { contactSchema, sanitizeContactInput } from '../../lib/schemas';
 import { appendToSheet, sendEmail } from '../../lib/contact-handlers';
 
 export const prerender = false;

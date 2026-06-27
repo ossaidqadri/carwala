@@ -1,0 +1,84 @@
+{
+    "tools": [
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\calcom_find_bookings_by_attendee.json",
+            "id": "tool_7701ktbqr1cneszapwz83zqpxbcs"
+        },
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\calcom_cancel_booking.json",
+            "id": "tool_5801ktbqr0sxf15rqgx7f0b22tnv"
+        },
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\calcom_get_booking.json",
+            "id": "tool_6101ktbqr07cewrs6peqs64jvha5"
+        },
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\calcom_get_all_bookings.json",
+            "id": "tool_9001ktbqqzmxfrq9q7p3axj9n97c"
+        },
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\calcom_get_available_slots.json",
+            "id": "tool_1401ktbqqz2ae4dad1sc8t75t9gz"
+        },
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\calcom_create_booking.json",
+            "id": "tool_5701ktbqqya8fh1s302d4r8vrjh0"
+        },
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\whatsapp_send_message.json",
+            "id": "tool_4001krjy8bqyem8t95pytw98bjn6"
+        },
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\calcom_get_booking-1.json",
+            "id": "tool_6201kmkce3vxeh68tzv8t13nnye9"
+        },
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\calcom_cancel_booking-1.json",
+            "id": "tool_9301kmkce4c0ftxa174p4dejphec"
+        },
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\calcom_get_all_bookings-1.json",
+            "id": "tool_1401kmkce3bnenm9mhw1m5nx4jx6"
+        },
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\calcom_get_available_slots-1.json",
+            "id": "tool_3201kmkce2v0ebcrbhx0jfpykww9"
+        },
+        {
+            "type": "api_integration_webhook",
+            "config": "tool_configs\\calcom_create_booking-1.json",
+            "id": "tool_9301kmkce2asex5s0045j5nnf3tn"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs\\create_booking.json",
+            "id": "tool_3801kmd11gg7e8fvahntrq1jm2m0"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs\\get_available_slots.json",
+            "id": "tool_5801kmd11gg6enb8dmtk5b2j1nb0"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs\\create_booking-1.json",
+            "id": "tool_0801km4jc9hcfrp9tvr3e2zbbqnd"
+        },
+        {
+            "type": "webhook",
+            "config": "tool_configs\\get_available_slots-1.json",
+            "id": "tool_2601km4jc9hbftxvqp9j7eree1a4"
+        }
+    ]
+}
