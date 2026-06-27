@@ -1,4 +1,5 @@
 ---
+import { Font } from 'astro:assets';
 import { QueryProvider } from '../components/QueryProvider';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 import { WhatsAppWidget } from '../components/WhatsAppWidget';
@@ -26,10 +27,10 @@ const { title, description = 'Professional car wash and detailing services in Ka
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/Website Favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-icon.png" />
-    <link rel="preload" href="/fonts/ITC Avant Garde Gothic PRO Font Family/ITC Avant Garde Gothic Pro-Book.otf" as="font" type="font/otf" crossorigin="anonymous" />
-    <link rel="preload" href="/fonts/Montserrat/Montserrat-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
-    <link rel="preload" href="/fonts/Pixel-operator/PixelOperator-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
-    <link rel="preload" href="/fonts/Mulish/Mulish-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <Font cssVariable="--font-heading" preload />
+    <Font cssVariable="--font-body" />
+    <Font cssVariable="--font-pixel" />
+    <Font cssVariable="--font-accent" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
