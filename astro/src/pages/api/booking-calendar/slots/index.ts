@@ -1,16 +1,20 @@
 import type { APIRoute } from "astro";
-import { applyRateLimit } from "@lib/booking-calendar/utils/rate-limiting";
 
 export const prerender = false;
 
 const CALCOM_API_VERSION = "2024-09-04";
+const JSON_HEADERS = { "Content-Type": "application/json" };
+const SLOT_CACHE_HEADERS = {
+  ...JSON_HEADERS,
+  "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60",
+};
+const NO_STORE_JSON_HEADERS = {
+  ...JSON_HEADERS,
+  "Cache-Control": "no-store",
+};
 
 export const GET: APIRoute = async ({ request }) => {
   try {
-    const ip = request.headers.get('CF-Connecting-IP') ?? request.headers.get('X-Forwarded-For') ?? '127.0.0.1';
-    const rateLimit = await applyRateLimit(ip);
-    if (!rateLimit.allowed) return rateLimit.response!;
-
     const url = new URL(request.url);
     const eventTypeId = url.searchParams.get("eventTypeId");
     const start = url.searchParams.get("dateFrom");
@@ -19,7 +23,7 @@ export const GET: APIRoute = async ({ request }) => {
     if (!eventTypeId || !start || !end) {
       return new Response(
         JSON.stringify({ error: "Missing required query params: eventTypeId, dateFrom, dateTo" }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
+        { status: 400, headers: NO_STORE_JSON_HEADERS }
       );
     }
 
@@ -42,20 +46,20 @@ export const GET: APIRoute = async ({ request }) => {
     if (!response.ok) {
       return new Response(JSON.stringify(data), {
         status: response.status,
-        headers: { "Content-Type": "application/json" },
+        headers: NO_STORE_JSON_HEADERS,
       });
     }
 
     const slots = data?.data ?? {};
     return new Response(JSON.stringify(slots), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: SLOT_CACHE_HEADERS,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Internal server error";
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: NO_STORE_JSON_HEADERS,
     });
   }
 };

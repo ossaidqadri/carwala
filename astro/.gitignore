@@ -35,3 +35,4 @@ tasks/
 tests.json
 astro/.tmp-dev-err.log
 astro/.tmp-dev-out.log
+.vercel
