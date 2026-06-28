@@ -31,7 +31,7 @@ export const ContactSection = <T extends FieldValues>({ control }: ContactSectio
                 <Input
                   type="text"
                   placeholder="Your full name"
-                  autocomplete="name"
+                  autoComplete="name"
                   {...field}
                   className="h-12 bg-muted text-foreground border-border focus-visible:border-blue-500 focus-visible:ring-blue-500/50"
                 />
@@ -51,7 +51,7 @@ export const ContactSection = <T extends FieldValues>({ control }: ContactSectio
                 <Input
                   type="email"
                   placeholder="your@email.com"
-                  autocomplete="email"
+                  autoComplete="email"
                   {...field}
                   className="h-12 bg-muted text-foreground border-border focus-visible:border-blue-500 focus-visible:ring-blue-500/50"
                 />

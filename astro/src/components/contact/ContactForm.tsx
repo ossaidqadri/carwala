@@ -86,7 +86,7 @@ function ContactFormInner() {
               <FormItem>
                 <FormLabel>Full Name *</FormLabel>
                 <FormControl>
-                  <Input placeholder="John Doe…" autocomplete="name" {...field} />
+                  <Input placeholder="John Doe…" autoComplete="name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -99,7 +99,7 @@ function ContactFormInner() {
               <FormItem>
                 <FormLabel>Email Address *</FormLabel>
                 <FormControl>
-                  <Input placeholder="john@example.com…" autocomplete="email" {...field} />
+                  <Input placeholder="john@example.com…" autoComplete="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

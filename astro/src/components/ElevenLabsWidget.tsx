@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 declare global {
-  namespace JSX {
+  namespace React.JSX {
     interface IntrinsicElements {
       'elevenlabs-convai': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
         'agent-id'?: string;
@@ -63,11 +63,21 @@ function useHideShadowBranding() {
 export default function ElevenLabsWidget({ agentId }: { agentId: string }) {
   useHideShadowBranding();
 
+  useEffect(() => {
+    const SCRIPT_SRC = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+
+    if (document.querySelector(`script[src="${SCRIPT_SRC}"]`)) return;
+
+    const script = document.createElement('script');
+    script.src = SCRIPT_SRC;
+    script.async = true;
+    document.head.appendChild(script);
+  }, []);
+
   return (
     <>
       <elevenlabs-convai agent-id={agentId} />
       <link rel="preload" href="https://unpkg.com/@elevenlabs/convai-widget-embed" as="script" />
-      <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" strategy="lazyOnload" />
     </>
   );
 }

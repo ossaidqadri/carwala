@@ -13,7 +13,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   site: 'https://carwala.org',
   output: 'static',
-  adapter: vercel({ imageService: true }),
+  adapter: vercel({
+    imageService: true,
+  }),
   integrations: [react(), sitemap()],
   fonts: [
     {
@@ -61,10 +63,10 @@ export default defineConfig({
     },
   ],
   routeRules: {
-    '/': { cache: { maxAge: 3600, staleWhileRevalidate: 86400 } },
-    '/pricing': { cache: { maxAge: 3600, staleWhileRevalidate: 86400 } },
-    '/gallery': { cache: { maxAge: 7200, staleWhileRevalidate: 86400 } },
-    '/maintenance': { cache: { maxAge: 3600, staleWhileRevalidate: 86400 } },
+    '/': { maxAge: 3600, swr: 86400 },
+    '/pricing': { maxAge: 3600, swr: 86400 },
+    '/gallery': { maxAge: 7200, swr: 86400 },
+    '/maintenance': { maxAge: 3600, swr: 86400 },
   },
   vite: {
     plugins: [tailwindcss()],
@@ -76,9 +78,6 @@ export default defineConfig({
     },
     optimizeDeps: {
       exclude: ['@tanstack/react-query'],
-    },
-    ssr: {
-      noExternal: ['@tanstack/react-query'],
     },
   },
 });

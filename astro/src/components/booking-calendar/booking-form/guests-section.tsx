@@ -100,7 +100,7 @@ export const GuestsSection: React.FC<GuestsSectionProps> = ({
                 setGuestEmailError('');
               }}
               placeholder="Guest email address"
-              autocomplete="email"
+              autoComplete="email"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   e.preventDefault();
