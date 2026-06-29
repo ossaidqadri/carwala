@@ -61,7 +61,7 @@ const { src: heroPosterSrc } = await getImage({ src: heroPoster, format: 'webp',
           <div class="flex -space-x-2">
             {avatars.map(src => (
               <div class="w-10 h-10 rounded-full border-2 border-primary/30 overflow-hidden relative z-0 bg-gray-800">
-                <Picture src={src} class="w-full h-full object-cover" alt="" widths={[40, 80]} formats={['webp', 'avif']} />
+                <Picture src={src} class="w-full h-full object-cover" alt="" widths={[40, 80]} formats={['avif', 'webp']} />
               </div>
             ))}
           </div>
