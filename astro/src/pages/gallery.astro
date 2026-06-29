@@ -5,7 +5,7 @@ import { Header } from '../components/home/Header';
 import { Footer } from '../components/home/Footer';
 import Compare from '../components/ui/compare.astro';
 import ElevenLabsWidget from '../components/ElevenLabsWidget';
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 
 import dirtyRearFloor from '../assets/media/Before/dirty-rear-floor.webp';
 import scratchedRoofPaint from '../assets/media/Before/scratched-roof-paint.webp';
@@ -87,11 +87,13 @@ const comparisonImages = [
             <div
               class="group relative aspect-square overflow-hidden rounded-lg bg-muted"
             >
-              <Image
+              <Picture
                 src={item.src}
                 alt={item.alt}
                 loading="lazy"
                 decoding="async"
+                widths={[400, 800, 1200]}
+                formats={['webp', 'avif']}
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>

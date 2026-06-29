@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 
 interface CompareProps {
   firstImage: ImageMetadata;
@@ -62,21 +62,23 @@ const sliderId = `slider-${Math.random().toString(36).slice(2, 9)}`;
       class="absolute inset-0 z-20 rounded-lg shrink-0 w-full h-full select-none overflow-hidden"
       data-first-image-wrapper
     >
-      <Image
+      <Picture
         src={firstImage}
         alt="Before treatment result"
         class={`absolute inset-0 z-20 rounded-lg shrink-0 w-full h-full select-none ${firstImageClassName}`}
-        draggable={false}
+        widths={[400, 800, 1200]}
+        formats={['webp', 'avif']}
       />
     </div>
   </div>
 
   <!-- Second Image (background) -->
-  <Image
+  <Picture
     src={secondImage}
     alt="After treatment result"
     class={`absolute top-0 left-0 z-[19] rounded-lg w-full h-full select-none ${secondImageClassname}`}
-    draggable={false}
+    widths={[400, 800, 1200]}
+    formats={['webp', 'avif']}
   />
 </div>
 

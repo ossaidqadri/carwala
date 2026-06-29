@@ -1,5 +1,9 @@
 ---
 import { Wrench, Truck, UserCheck, Award } from '@lucide/astro';
+import { getImage } from 'astro:assets';
+import whyUsPoster from '../../assets/media/services-overview.webp';
+
+const { src: whyUsPosterSrc } = await getImage({ src: whyUsPoster, format: 'webp', width: 1920 });
 
 const features = [
   {
@@ -55,6 +59,7 @@ const features = [
           loop
           playsinline
           preload="metadata"
+          poster={whyUsPosterSrc}
         >
           <source src="/media/why-choose-us-video.mp4" type="video/mp4" />
         </video>

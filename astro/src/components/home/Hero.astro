@@ -1,12 +1,14 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import { ArrowUpRight } from '@lucide/astro';
 import avatar1 from '../../assets/media/avatar-customer-1.webp';
 import avatar2 from '../../assets/media/avatar-customer-2.webp';
 import avatar3 from '../../assets/media/avatar-customer-3.webp';
 import avatar4 from '../../assets/media/avatar-customer-4.webp';
+import heroPoster from '../../assets/media/services-overview.webp';
 
 const avatars = [avatar1, avatar2, avatar3, avatar4];
+const { src: heroPosterSrc } = await getImage({ src: heroPoster, format: 'webp', width: 1920 });
 ---
 
 <div class="relative w-full h-screen min-h-[800px] flex items-end pb-25 overflow-hidden">
@@ -18,6 +20,7 @@ const avatars = [avatar1, avatar2, avatar3, avatar4];
       loop
       playsinline
       preload="auto"
+      poster={heroPosterSrc}
       aria-label="Hero background video"
     >
       <source src="/media/hero-car-detail-video.mp4" type="video/mp4" />
@@ -58,7 +61,7 @@ const avatars = [avatar1, avatar2, avatar3, avatar4];
           <div class="flex -space-x-2">
             {avatars.map(src => (
               <div class="w-10 h-10 rounded-full border-2 border-primary/30 overflow-hidden relative z-0 bg-gray-800">
-                <Image src={src} class="w-full h-full object-cover" alt="" width={40} height={40} />
+                <Picture src={src} class="w-full h-full object-cover" alt="" widths={[40, 80]} formats={['webp', 'avif']} />
               </div>
             ))}
           </div>

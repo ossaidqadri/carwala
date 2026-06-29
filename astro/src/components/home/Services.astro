@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import { Sparkles, Shield, Wand2, Gem, Sun, Calendar } from '@lucide/astro';
 import bg1 from '../../assets/media/avatar-customer-1.webp';
 import bg2 from '../../assets/media/avatar-customer-2.webp';
@@ -66,12 +66,14 @@ const services = [
           style={`animation-timeline: view(); animation-range: entry ${i * 5}% entry ${i * 5 + 50}%`}
         >
           <div class="absolute inset-0">
-            <Image
+            <Picture
               src={service.bg}
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               alt=""
               loading="lazy"
               decoding="async"
+              widths={[400, 800, 1200]}
+              formats={['webp', 'avif']}
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-90" />
