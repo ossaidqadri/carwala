@@ -8,8 +8,6 @@
   --font-body: 'Mulish';
   --font-accent: 'Montserrat';
   --font-ui: 'Montserrat';
-  --font-pixel: 'Pixel Operator';
-
   /* Audi Brand Colors - Light Mode (Classic Showroom) */
   --background: #FFFFFF;
   --foreground: #101319;
@@ -142,7 +140,6 @@
   --font-body: var(--font-body);
   --font-accent: var(--font-accent);
   --font-ui: var(--font-ui);
-  --font-pixel: var(--font-pixel);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
