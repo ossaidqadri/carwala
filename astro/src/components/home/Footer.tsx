@@ -25,7 +25,7 @@ export function Footer() {
             stroke="var(--footer-bg)"
             strokeWidth="8"
             paintOrder="stroke fill"
-            style={{ fontFamily: "'Pixel Operator', monospace", fontWeight: 700, fontSize: '80px', letterSpacing: '0.25em' }}
+            style={{ fontFamily: 'var(--font-pixel), monospace', fontWeight: 700, fontSize: '80px', letterSpacing: '0.25em' }}
           >
             CARWALA
           </text>
