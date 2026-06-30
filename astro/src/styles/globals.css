@@ -140,6 +140,7 @@
   --font-body: var(--font-body);
   --font-accent: var(--font-accent);
   --font-ui: var(--font-ui);
+  --font-pixel: var(--font-pixel);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
