@@ -34,6 +34,7 @@ const { title, description = 'Professional car wash and detailing services in Ka
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Carwala" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -46,6 +47,31 @@ const { title, description = 'Professional car wash and detailing services in Ka
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://carwala.org/og-image.png" />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: 'Carwala',
+      legalName: 'Muhammad Areeb Ali',
+      url: 'https://carwala.org',
+      telephone: '+923310444333',
+      email: 'support@carwala.org',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'House No 512, New Iqbal Abad, Druh Road, Gulshan Town',
+        addressLocality: 'Karachi East',
+        addressRegion: 'Sindh',
+        postalCode: '75300',
+        addressCountry: 'PK',
+      },
+      sameAs: [
+        'https://www.facebook.com/carwala.official',
+        'https://www.instagram.com/carwala.official',
+        'https://www.tiktok.com/@carswala.official',
+        'https://www.linkedin.com/company/car-wala',
+        'https://www.youtube.com/@carswala.official',
+      ],
+    })} />
   </head>
   <body class="font-body antialiased">
     <ErrorBoundary client:load>

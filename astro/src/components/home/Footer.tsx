@@ -140,12 +140,18 @@ export function Footer() {
             >
               +92 331 0444333
             </a>
+            <a
+              href="mailto:support@carwala.org"
+              className="text-sm hover:opacity-60 transition-opacity w-fit"
+            >
+              support@carwala.org
+            </a>
           </div>
         </div>
       </div>
 
       <div className="px-6 py-4 md:px-12 flex flex-col md:flex-row items-center justify-between gap-3 text-xs font-accent uppercase tracking-widest opacity-70">
-        <span>&copy; {currentYear} Carwala. All Rights Reserved.</span>
+        <span>&copy; {currentYear} Carwala, operated by Muhammad Areeb Ali. All Rights Reserved.</span>
         <span>
           Made with <span className="text-red-500 normal-case">&#9829;</span> by{' '}
           <a
