@@ -50,8 +50,8 @@ export function Header() {
           </div>
 
           <a href="/" className="absolute left-1/2 -translate-x-1/2" onClick={() => setIsMobileMenuOpen(false)}>
-            <h1 className="text-[20px] md:text-[36px] font-pixel font-bold text-foreground tracking-wider whitespace-nowrap">
-              CARWALA
+            <h1 className="text-[20px] md:text-[36px] font-pixel font-bold text-foreground tracking-wider whitespace-nowrap uppercase">
+              Carwala
             </h1>
           </a>
 
