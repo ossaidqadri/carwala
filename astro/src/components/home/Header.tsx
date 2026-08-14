@@ -51,7 +51,7 @@ export function Header() {
 
           <a href="/" className="absolute left-1/2 -translate-x-1/2" onClick={() => setIsMobileMenuOpen(false)}>
             <h1 className="text-[20px] md:text-[36px] font-pixel font-bold text-foreground tracking-wider whitespace-nowrap">
-              CAR WALA
+              CARWALA
             </h1>
           </a>
 
